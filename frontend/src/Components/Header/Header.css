@@ -1,11 +1,28 @@
-.navbar{
-    width: 100%;
-    height: 3.5em;
-    background-color: #fefbfc;
-    display: flex;
-}
 
-.logo{
-    max-width: 8%;
-    margin: auto;
-}
+  .logo{
+	width: 6em;
+	cursor: pointer;
+  }
+  .navbar{
+	width: 100%;
+	height: 4em;
+	background-color:#fefbfc ;
+  }
+  .toggler{
+	border: none;
+	text-decoration: none;
+	outline: none;
+	background-color:#fefbfc;
+	padding: 0;
+	margin-right: 1em;
+  }
+  .navbar-toggler:focus{
+	box-shadow: none;
+  }
+ .colapsed{
+	background-color: #fefbfc;
+ }
+ .btn-primary {
+	background-color: black;
+	border: none;
+ }
