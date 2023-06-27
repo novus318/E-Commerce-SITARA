@@ -1,12 +1,17 @@
 
   .logo{
-	width: 6em;
+	width: 5.5em;
 	cursor: pointer;
   }
   .navbar{
 	width: 100%;
 	height: 4em;
 	background-color:#fefbfc ;
+  }
+  .nav-link{
+	font-family: Netflix Sans,Helvetica Neue,Segoe UI,Roboto,Ubuntu,sans-serif;
+	font-weight: 800;
+	color: #646464;
   }
   .toggler{
 	border: none;
@@ -25,4 +30,56 @@
  .btn-primary {
 	background-color: #fefbfc;
 	border: none;
+	font-family: Netflix Sans,Helvetica Neue,Segoe UI,Roboto,Ubuntu,sans-serif;
+	font-weight: 800;
+	color: #646464;
+	margin-top: 2px;
  }
+ .btn-primary:hover {
+	background-color: #fefbfc;
+	border: none;
+	font-family: Netflix Sans,Helvetica Neue,Segoe UI,Roboto,Ubuntu,sans-serif;
+	font-weight: 800;
+	color: #646464;
+	margin-top: 2px;
+ }
+ .dropdown-toggle::after {
+	display: none !important; 
+  }
+ .btn-check:checked+.btn, .btn.active, .btn.show, .btn:first-child:active, :not(.btn-check)+.btn:active{
+	background: none;
+	color: #646464;
+ }
+ /*search*/
+ .search{
+ position: relative;
+ width: 4em;
+  border-radius: 1em;
+  color: #646464;
+  background-color: #646464;
+  transition: width 0.4s ease;
+	border: none;
+  
+  &:focus{width: 20em;
+	color: #ffffff;
+	font-size: 16px;
+	font-weight: 500;
+	letter-spacing:0.3em;
+	text-align: center;
+	font-family: Netflix Sans,Helvetica Neue,Segoe UI,Roboto,Ubuntu,sans-serif;
+	border: none;
+	cursor: text;
+	border-radius: 0.9em;
+	transition: width 0.4s ease;
+	outline: none;}
+}
+.dropdown-menu{
+	background-color: #fefbfc;
+	border: none;
+	--bs-dropdown-link-active-bg:none;
+} 
+.s{
+	position: relative;
+	left: -2.5em;
+	color: #fffdfd;
+}
