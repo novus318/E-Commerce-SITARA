@@ -9,7 +9,7 @@ function Header() {
       collapseOnSelect
       expand="md"
       variant="light"
-      className="shadow-sm"
+      className="shadow"
       fixed="top"
     >
       <Navbar.Brand className='ms-4 mb-2' ><img className='logo' src={Logo}alt='logo'/></Navbar.Brand>
