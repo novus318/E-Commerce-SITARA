@@ -10,6 +10,7 @@ function Banner() {
   };
 
   return (
+    <div className='banner'>
     <Carousel activeIndex={index} onSelect={handleSelect}>
       <Carousel.Item>
         <img
@@ -49,6 +50,7 @@ function Banner() {
         </Carousel.Caption>
       </Carousel.Item>
     </Carousel>
+    </div>
   );
 }
 
