@@ -1,22 +1,49 @@
-.p-card{
-    height: 20em;
-    width: 11em;
-    margin-left: 1.7em;
-    
+.product-card {
+    width: 12em;
+    position: relative;
+    margin-left: 1.5em;
 }
-.p-image{
-    height: 14em;
-    width: 100%;
-}
-.p-title{
-    font-family: Netflix Sans,Helvetica Neue,Segoe UI,Roboto,Ubuntu,sans-serif;
-    font-weight: 800;
-    text-transform: uppercase;
-}
-.p-body{
-    height: 6em;
-    padding: 0;
-}
-.p-text{
+
+.product-tumb {
     display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 14em;
+    box-shadow: 0 2px 7px #bbbaba;
+    background: #f0f0f0;
+}
+
+.product-tumb img {
+    width: 100%;
+    height: 100%;
+}
+.p-head{
+    font-weight: 500;
+    display: block;
+    text-transform: uppercase;
+    color: #363636;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.product-details p {
+    font-size: 0.8em;
+    color: #656565;
+    margin-bottom: 0;
+}
+
+.product-bottom-details {
+    overflow: hidden;
+    border-top: 1px solid #eee;
+}
+
+.product-bottom-details div {
+    float: left;
+    width: 50%;
+}
+
+.product-price {
+    font-size: 18px;
+    color: #656565;
+    font-weight: 600;
 }
