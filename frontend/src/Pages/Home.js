@@ -1,5 +1,5 @@
 import React from 'react';
-
+import Recomendation from '../Components/Recomendation/Recomendation'
 import Header from '../Components/Header/Header';
 import Banner from '../Components/Banner/Banner';
 import Footer from '../Components/Footer/Footer';
@@ -11,6 +11,7 @@ function Home(props) {
       <Header />
       <Banner />
       <Categories />
+      <Recomendation/>
       <Footer />
     </div>
   );

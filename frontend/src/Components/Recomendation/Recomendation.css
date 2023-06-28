@@ -1,0 +1,22 @@
+.p-card{
+    height: 20em;
+    width: 11em;
+    margin-left: 1.7em;
+    
+}
+.p-image{
+    height: 14em;
+    width: 100%;
+}
+.p-title{
+    font-family: Netflix Sans,Helvetica Neue,Segoe UI,Roboto,Ubuntu,sans-serif;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+.p-body{
+    height: 6em;
+    padding: 0;
+}
+.p-text{
+    display: flex;
+}
