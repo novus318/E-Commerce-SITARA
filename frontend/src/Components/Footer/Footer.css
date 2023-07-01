@@ -1,0 +1,18 @@
+.footer{
+    background-color: #656565;
+}
+.cursor{
+    cursor: pointer;
+}
+.footer-span{
+    text-transform: uppercase;
+    font-weight: 800;
+    border-radius: 0.2em;
+    color: #fff;
+    cursor: pointer;
+    text-decoration: none;
+}
+.footer-span:hover{
+    background-color: aliceblue;
+    color: #656565;
+}

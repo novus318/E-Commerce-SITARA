@@ -26,7 +26,7 @@ function Banner() {
       <Carousel.Item>
         <img
           className="d-block w-100"
-          src="https://assets.tatacliq.com/medias/sys_master/images/47506177261598.jpg"
+          src="https://assets.tatacliq.com/medias/sys_master/images/47313909907486.jpg"
           alt="Second slide"
         />
 
@@ -47,6 +47,17 @@ function Banner() {
           <p>
             Praesent commodo cursus magna, vel scelerisque nisl consectetur.
           </p>
+        </Carousel.Caption>
+      </Carousel.Item>
+      <Carousel.Item>
+        <img
+          className="d-block w-100"
+          src="https://assets.tatacliq.com/medias/sys_master/images/47532424986654.png"
+          alt="First slide"
+        />
+        <Carousel.Caption>
+          <h3>First slide label</h3>
+          <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
         </Carousel.Caption>
       </Carousel.Item>
     </Carousel>
