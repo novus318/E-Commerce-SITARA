@@ -10,3 +10,13 @@ background-color: #656565;
 color: #fff;
 margin-bottom: 1em;
 }
+a{
+    color: #656565;
+}
+.register{
+    font-weight: 600;
+    cursor: pointer;
+}
+.register:hover{
+    color: #0a58cacf;
+}
