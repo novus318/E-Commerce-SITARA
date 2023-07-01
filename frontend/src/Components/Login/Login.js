@@ -1,6 +1,7 @@
 import { useContext, useState } from 'react';
 import './Login.css';
 import {useGoogleLogin} from '@react-oauth/google';
+import {FbAppId} from '../../api credentials/Api'
 
 import {
   MDBContainer,
@@ -15,19 +16,22 @@ import {
   MDBCheckbox
 } from 'mdb-react-ui-kit';
 import { UserContext } from '../../store/userContext';
-import FacebookLogin from 'react-facebook-login'
+import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
   const [justifyActive, setJustifyActive] = useState('login');
   const {setUser} = useContext(UserContext)
   console.log(setUser)
   const login = useGoogleLogin({
-    onSuccess: (codeResponse) => setUser(codeResponse),
+    onSuccess: (codeResponse) => {setUser(codeResponse)
+    history('/')},
     onError: (error) => console.log('Login Failed:', error)
 });
-
+const history=useNavigate()
 const responseFacebook = (response) => {
-  console.log(response);
+  setUser(response);
+  history('/')
 }
   const handleJustifyClick = (value) => {
     if (value === justifyActive) {
@@ -58,23 +62,21 @@ const responseFacebook = (response) => {
         <MDBTabsPane show={justifyActive === 'login'}>
           <div className="text-center mb-3">
             <p>Login with:</p>
-            <div className='d-flex justify-content-between mx-auto'style={{width: '25%'}}>
+            <div className='d-flex justify-content-between mx-auto mb-5'>
               
               <FacebookLogin
-    appId="1088597931155576"
-    autoLoad={true}
+    appId={FbAppId}
+    autoLoad={false}
     fields="name,email,picture"
     callback={responseFacebook}
     render={(renderProps) => (
-      <MDBBtn tag='a' color='none' className='m-1' onClick={renderProps.onClick}>
-        <MDBIcon fab icon='facebook-f' size="lg" />
+      <MDBBtn tag='a' color='none' className='m-1 m-auto me-4' onClick={renderProps.onClick}>
+        <MDBIcon fab icon='facebook-f' size="2x" />
       </MDBBtn>
     )}
   />
-              
-
-              <MDBBtn onClick={() => login()} tag='a' color='none' className='m-1'>
-              <MDBIcon fab icon='google' size="lg" />
+              <MDBBtn onClick={() => login()} tag='a' color='none' className='m-1 m-auto'>
+              <MDBIcon fab icon='google' size="2x" />
               </MDBBtn>
             </div>
           </div>
@@ -85,7 +87,7 @@ const responseFacebook = (response) => {
           <div className="d-flex mx-4 mb-4">
             <a href="!#">Forgot ?</a>
           </div>
-          <MDBBtn className='btn-login col-6'>Login</MDBBtn>
+          <MDBBtn className='btn-login col-12'>Login</MDBBtn>
           </form>
           <p className="text-center">Not a member? <span className='register' onClick={() => handleJustifyClick('signUp')} active={justifyActive === 'signUp'}>Register</span></p>
 
@@ -95,16 +97,24 @@ const responseFacebook = (response) => {
 
           <div className="text-center mb-3">
             <p>Sign un with:</p>
-
-            <div className='d-flex justify-content-between mx-auto' style={{width: '25%'}}>
-              <MDBBtn tag='a' color='none' className='m-1'>
-                <MDBIcon fab icon='facebook-f' size="lg"/>
-              </MDBBtn>
-
-              <MDBBtn onClick={() => login()} tag='a' color='none' className='m-1' >
-                <MDBIcon fab icon='google' size="gl"/>
+            <div className='d-flex justify-content-between mx-auto mb-5'>
+              
+              <FacebookLogin
+    appId={FbAppId}
+    autoLoad={false}
+    fields="name,email,picture"
+    callback={responseFacebook}
+    render={(renderProps) => (
+      <MDBBtn tag='a' color='none' className='m-1 m-auto me-4' onClick={renderProps.onClick}>
+        <MDBIcon fab icon='facebook-f' size="2x" />
+      </MDBBtn>
+    )}
+  />
+              <MDBBtn onClick={() => login()} tag='a' color='none' className='m-1 m-auto'>
+              <MDBIcon fab icon='google' size="2x" />
               </MDBBtn>
             </div>
+            
           </div>
         <form>
           <MDBInput wrapperClass='mb-4' placeholder='Name'  type='text'/>

@@ -1,8 +1,10 @@
 .nav-pills .nav-link.active{
-    background-color: #656565;
+    background-color: rgba(101,101,101,0.7);
+    border-radius: 1em;
 }
 .nav-link:hover{
     color: #656565;
+    border-radius: 1em;
 }
 
 .btn-login{

@@ -13,6 +13,28 @@
 	font-weight: 800;
 	color: #646464;
   }
+  .profile{
+	font-family:Netflix Sans,Helvetica Neue,Segoe UI,Roboto,Ubuntu,sans-serif;
+	font-weight: 800;
+	color: #646464;
+	text-transform: uppercase;
+	margin-right: 0.5em;
+	cursor: pointer;
+  }
+  .profile:hover{
+	color: #fff;
+	background-color: #646464;
+  }
+  .logout{
+color: #646464;
+}
+.dropdown-item:hover .logout{
+	color: #fff;
+}
+.dropdown-item:hover{
+	color: #fff;
+	background-color: #646464
+}
   .toggler{
 	border: none;
 	text-decoration: none;
