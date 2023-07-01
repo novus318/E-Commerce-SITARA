@@ -25,7 +25,7 @@ function BestSellers() {
       }
   return (
     <div className='mt-4 mb-4'>
-      <div className='text-center mb-4'>
+      <div className='mb-4'>
         <h2>Best Sellers</h2>
       </div>
       <div>

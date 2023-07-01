@@ -1,8 +1,12 @@
 import './Header.css';
 import Logo from '../../assets/images/logo.png'
 import { Nav, Navbar,Dropdown } from "react-bootstrap"
+import {useNavigate} from 'react-router-dom'
 function Header() {
-
+  const history=useNavigate()
+const login=()=>{
+history('/login')
+}
   return (
     <div className='navbar'>
     <Navbar
@@ -23,7 +27,7 @@ function Header() {
       </div>
         <div className='ms-auto'>
         <Nav className="ms-2 me-2 ">
-          <div className='ps-3'><Nav.Link>Login</Nav.Link></div>
+          <div onClick={login} className='ps-3'><Nav.Link>Login</Nav.Link></div>
           <div className='mb-2'> 
           <Dropdown><Dropdown.Toggle>Categories</Dropdown.Toggle>
           <Dropdown.Menu>
