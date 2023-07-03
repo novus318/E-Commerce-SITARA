@@ -1,0 +1,32 @@
+{
+  "name": "e-commerce-sitara-mern",
+  "version": "1.0.0",
+  "description": "MERN STACK PROJECT This is Women's Clothing Brand E-Commerce Web Application it is designed with advanced Technology",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "server": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/novus318/E-Commerce-SITARA-MERN.git"
+  },
+  "keywords": [],
+  "author": "Muhammed Nizamudheen M",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/novus318/E-Commerce-SITARA-MERN/issues"
+  },
+  "homepage": "https://github.com/novus318/E-Commerce-SITARA-MERN#readme",
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "colors": "^1.4.0",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.0",
+    "mongoose": "^7.3.1",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.22"
+  }
+}
