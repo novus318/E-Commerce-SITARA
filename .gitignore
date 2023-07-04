@@ -1,5 +1,5 @@
 .env
-
+/frontend/src/api credentials
 # dependencies
 /node_modules
 /.pnp
