@@ -16,8 +16,8 @@
   .a-link{
 	text-decoration: none;
 	font-family:  Netflix Sans,Helvetica Neue,Segoe UI,Roboto,Ubuntu,sans-serif;
-	font-weight: 800;
-	font-size: 1.45em;
+	font-weight: 600;
+	font-size: 1.4em;
 	color: #646464;
 
 
@@ -36,6 +36,7 @@
   }
   .logout{
 color: #646464;
+padding: 0.8em;
 }
 .dropdown-item:hover .logout{
 	color: #fff;
@@ -62,8 +63,8 @@ color: #646464;
 	background-color: #fefbfc;
 	border: none;
 	font-family: Netflix Sans,Helvetica Neue,Segoe UI,Roboto,Ubuntu,sans-serif;
-	font-weight: 800;
-	font-size: 1.45em;
+	font-weight: 600;
+	font-size: 1.4em;
 	color: #646464;
 	margin-top: 2px;
  }
@@ -71,7 +72,7 @@ color: #646464;
 	background-color: #fefbfc;
 	border: none;
 	font-family: Netflix Sans,Helvetica Neue,Segoe UI,Roboto,Ubuntu,sans-serif;
-	font-weight: 800;
+	font-weight: 600;
 	color: #646464;
 	margin-top: 2px;
  }

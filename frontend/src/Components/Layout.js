@@ -1,8 +1,6 @@
 import React from 'react'
 import {Helmet} from "react-helmet";
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-
+import { Toaster } from 'react-hot-toast';
 
 function Layout({children,title,description,keywords,author}) {
   return (
@@ -14,7 +12,7 @@ function Layout({children,title,description,keywords,author}) {
   <meta name="author" content={author} />
                 <title>{title}</title>
             </Helmet>
-            <ToastContainer/>
+            <Toaster />
       {children}
     </div>
   )

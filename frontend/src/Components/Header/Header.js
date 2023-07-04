@@ -38,7 +38,7 @@ const logOut = () => {
           {profile? <div className='ps-3 me-3'> 
           <Dropdown>
             <Dropdown.Toggle>
-          <MDBIcon icon='user-alt' size='lg' />
+          <MDBIcon className='pt-3 pb-3' icon='user-alt' size='lg' />
           </Dropdown.Toggle>
           <Dropdown.Menu>
           <Dropdown.Item className='profile' ><Link className='a-link' to='/profile'>Profile</Link></Dropdown.Item>

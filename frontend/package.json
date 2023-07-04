@@ -1,6 +1,6 @@
 {
   "name": "frontend",
-  "proxy":"http://localhost:8080",
+  "proxy": "http://localhost:8080",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -21,6 +21,7 @@
     "react-facebook-login": "^4.1.1",
     "react-fontawesome": "^1.7.1",
     "react-helmet": "^6.1.0",
+    "react-hot-toast": "^2.4.1",
     "react-multi-carousel": "^2.8.4",
     "react-router-dom": "^6.14.1",
     "react-scripts": "^5.0.1",
