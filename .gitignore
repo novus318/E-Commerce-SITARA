@@ -1,4 +1,4 @@
-.env
+
 /frontend/src/api credentials
 # dependencies
 /node_modules
@@ -19,3 +19,4 @@
 .env.production.local
 
 node_modules
+.env
