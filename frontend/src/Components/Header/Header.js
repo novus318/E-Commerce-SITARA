@@ -1,7 +1,7 @@
 import './Header.css';
 import Logo from '../../assets/images/logo.png'
-import { Nav, Navbar,Dropdown } from "react-bootstrap"
-import {useNavigate} from 'react-router-dom'
+import { Nav, Navbar,Dropdown} from "react-bootstrap"
+import {Link} from 'react-router-dom'
 import { useContext } from 'react';
 import { UserContext } from '../../store/userContext';
 import { MDBIcon } from 'mdb-react-ui-kit'
@@ -10,10 +10,7 @@ import { googleLogout } from '@react-oauth/google';
 function Header() {
   const {profile,setProfile} = useContext(UserContext)
   console.log(profile)
-  const history=useNavigate()
-const login=()=>{
-history('/login')
-}
+
 const logOut = () => {
   googleLogout();
   setProfile(null)
@@ -44,11 +41,11 @@ const logOut = () => {
           <MDBIcon icon='user-alt' size='lg' />
           </Dropdown.Toggle>
           <Dropdown.Menu>
-          <Dropdown.Item className='profile'>Profile</Dropdown.Item>
+          <Dropdown.Item className='profile' ><Link className='a-link' to='/profile'>Profile</Link></Dropdown.Item>
           <Dropdown.Item onClick={logOut}><MDBIcon icon='sign-out-alt' size='lg'className='logout' /></Dropdown.Item>
           </Dropdown.Menu>
           </Dropdown></div>:
-          <div onClick={login} className='ps-3'><Nav.Link>Login</Nav.Link></div>}
+          <div className='ps-3 pt-2'><Link className='a-link' to='/login'>Login</Link></div>}
           <div className='mb-2'> 
           <Dropdown><Dropdown.Toggle>Categories</Dropdown.Toggle>
           <Dropdown.Menu>

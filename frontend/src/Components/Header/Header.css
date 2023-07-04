@@ -13,12 +13,21 @@
 	font-weight: 800;
 	color: #646464;
   }
+  .a-link{
+	text-decoration: none;
+	font-family:  Netflix Sans,Helvetica Neue,Segoe UI,Roboto,Ubuntu,sans-serif;
+	font-weight: 800;
+	font-size: 1.45em;
+	color: #646464;
+
+
+  }
   .profile{
 	font-family:Netflix Sans,Helvetica Neue,Segoe UI,Roboto,Ubuntu,sans-serif;
 	font-weight: 800;
 	color: #646464;
 	text-transform: uppercase;
-	margin-right: 0.5em;
+	margin-right: 0.4em;
 	cursor: pointer;
   }
   .profile:hover{
@@ -54,6 +63,7 @@ color: #646464;
 	border: none;
 	font-family: Netflix Sans,Helvetica Neue,Segoe UI,Roboto,Ubuntu,sans-serif;
 	font-weight: 800;
+	font-size: 1.45em;
 	color: #646464;
 	margin-top: 2px;
  }
@@ -77,6 +87,7 @@ color: #646464;
  position: relative;
  width: 4em;
   border-radius: 1em;
+  cursor: pointer;
   color: #646464;
   background-color: #646464;
   transition: width 0.4s ease;
@@ -104,4 +115,7 @@ color: #646464;
 	position: relative;
 	left: -2.5em;
 	color: #fffdfd;
+}
+.s:hover{
+	cursor: pointer;
 }

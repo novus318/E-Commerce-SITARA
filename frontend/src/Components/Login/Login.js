@@ -19,17 +19,20 @@ import { UserContext } from '../../store/userContext';
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import {toast} from 'react-toastify'
 
 function Login() {
   const [justifyActive, setJustifyActive] = useState('login');
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [name, setName] = useState('')
-  const [userName, setUserName] = useState('')
+  const [phone, setPhone] = useState('')
   const [newEmail, setNewEmail] = useState('')
   const [newPassword, setNewPassword] = useState('')
+  const navigate = useNavigate()
   const handleLogin=async(e)=>{
     e.preventDefault()
+    
     try{
       await axios.post('http://localhost:9000/login',{
       email,password
@@ -43,13 +46,17 @@ function Login() {
   const handleSignup=async(e)=>{
     e.preventDefault()
     try{
-      await axios.post('http://localhost:9000/signup',{
-      name,userName,newEmail,newPassword
-      }).then(res=>{
-        console.log(res.data)
-      })
-    }catch(e){
+      const res=await axios.post('/api/v1/auth/signup',{name,newEmail,newPassword,phone})
+      if(res.data.success){
+        toast.success(res.data.message)
+        navigate('/login')
+      }else{
+        toast.error(res.data.message)
+      }
+    }
+    catch(e){
       console.log(e)
+      toast.error('something went wrong')
     }
   }
   const { setUser } = useContext(UserContext)
@@ -129,7 +136,7 @@ function Login() {
 
             <div className="text-center mb-3">
               <p>Sign un with:</p>
-              <div className='d-flex justify-content-between mx-auto mb-5'>
+              <div className='d-flex justify-content-between mx-auto mb-4'>
 
                 <FacebookLogin
                   appId={FbAppId}
@@ -150,10 +157,9 @@ function Login() {
             </div>
             <form action='POST' onSubmit={handleSignup}>
               <MDBInput wrapperClass='mb-4' onChange={(e)=>{setName(e.target.value)}} placeholder='Name' type='text' />
-              <MDBInput wrapperClass='mb-4' onChange={(e)=>{setUserName(e.target.value)}} placeholder='Username' type='text' />
               <MDBInput wrapperClass='mb-4' onChange={(e)=>{setNewEmail(e.target.value)}} placeholder='Email' type='email' />
               <MDBInput wrapperClass='mb-4' onChange={(e)=>{setNewPassword(e.target.value)}} placeholder='Password' type='password' />
-
+              <MDBInput wrapperClass='mb-4' onChange={(e)=>{setPhone(e.target.value)}} placeholder='Phone number' type='tel' />
               <div className='d-flex mb-4'>
                 <MDBCheckbox name='flexCheck' label='I have read and agree to the terms' />
               </div>

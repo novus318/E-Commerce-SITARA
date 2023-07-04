@@ -8,7 +8,7 @@ import BestSellers from '../Components/Best sellers/BestSellers';
 
 function Home(props) {
   return (
-    <div className="homeParentDiv">
+    <div className="home">
       <Header />
       <Banner />
       <Categories />

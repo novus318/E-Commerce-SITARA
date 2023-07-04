@@ -18,6 +18,10 @@ const userSchema= new mongoose.Schema({
     phone:{
         type:String,
         require:true,
+    },
+    role:{
+        type:Number,
+        default:0,
     }
 },{timestamps:true})
 export default mongoose.model('user',userSchema)

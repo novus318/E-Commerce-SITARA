@@ -8,6 +8,7 @@ import {
   MDBBtn
 } from 'mdb-react-ui-kit';
 import './Footer.css';
+import { Link } from 'react-router-dom';
 
 function Footer() {
   return (
@@ -42,42 +43,55 @@ function Footer() {
         <section className=''>
           <MDBRow>
             <MDBCol className='mb-4 mb-md-0'>
-              <h5 className='text-uppercase'>Sitara</h5>
+              <div className='text-uppercase fh'>Sitara</div>
 
               <ul className='list-unstyled mb-0'>
-                <li className='cursor'>
+                <li>
+                <Link to='/about' className='cursor'>
                     About
+                </Link>
+                <li>
                 </li>
-                <li className='cursor'>
-                    Contact Us
+                <Link to='/contact' className='cursor'>
+                Contact Us
+                </Link>
+                <li>
                 </li>
-                <li className='cursor'>
-                  Privacy Policy
+                <Link to='/privacy' className='cursor'>
+                Privacy Policy
+                </Link>
+                <li>
                 </li>
-                <li className='cursor'>
-                  Terms of Use
+                <Link to='/terms' className='cursor'>
+                Terms of Use
+                </Link>
                 </li>
               </ul>
             </MDBCol>
 
             <MDBCol className='mb-4 mb-md-0'>
-              <h5 className='text-uppercase'>Categories</h5>
+              <h5 className='text-uppercase fh'>Categories</h5>
 
-              <ul className='list-unstyled mb-0 cursor'>
+              <ul className='list-unstyled mb-0 '>
                 <li>
+                <Link to='/item1' className='cursor'>
                     item 1
+                </Link>
                 </li>
                 <li>
+                <Link to='/item2' className='cursor'>
                     item 2
+                </Link>
                 </li>
                 <li>
+                <Link to='/item3' className='cursor'>
                     item 3
+                </Link>
                 </li>
                 <li>
+                <Link to='/item4' className='cursor'>
                     item 4
-                </li>
-                <li>
-                    item 5
+                </Link>
                 </li>
               </ul>
             </MDBCol>
@@ -86,7 +100,7 @@ function Footer() {
       </MDBContainer>
 
       <div className='text-center p-3' style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }}>
-        © 2023 Designed & Developed by <a href='https://novus318.github.io/' target="_blank" rel='noreferrer' className='footer-span p-1'>Muhammed Nizamudheen M</a>
+        &copy; 2023 Designed & Developed by <a href='https://novus318.github.io/' target="_blank" rel='noreferrer' className='footer-span p-1'>Muhammed Nizamudheen M</a>
       </div>
     </MDBFooter>
     </div>

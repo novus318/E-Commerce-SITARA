@@ -3,6 +3,17 @@
 }
 .cursor{
     cursor: pointer;
+    text-decoration: none;
+    color: #fff;
+    font-family:Netflix Sans,Helvetica Neue,Segoe UI,Roboto,Ubuntu,sans-serif ;
+    font-weight: 700;
+    font-size: medium;
+}
+.fh{
+    color: #fff;
+    font-family:Netflix Sans,Helvetica Neue,Segoe UI,Roboto,Ubuntu,sans-serif ;
+    font-weight: 900;
+    font-size: 1.4em;
 }
 .footer-span{
     text-transform: uppercase;

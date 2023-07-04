@@ -9,22 +9,22 @@ try {
     //valudate
     if(!name){
         return res.send({
-            error:"Name is required"
+            message:"Name is required"
         })
     }
     if(!email){
         return res.send({
-            error:"email is required"
+            message:"email is required"
         })
     }
     if(!password){
         return res.send({
-            error:"password is required"
+            message:"password is required"
         })
     }
     if(!phone){
         return res.send({
-            error:"phone number is required"
+            message:"phone number is required"
         })
     }
 
@@ -33,7 +33,7 @@ try {
     //existing user
     if(existingUser){
         return res.status(200).send({
-            success:true,
+            success:false,
             message:"Already registered Please login"
         })
     }
@@ -101,4 +101,8 @@ export const loginController=async(req,res)=>{
             error
         })
     }
+}
+//text controller
+export const testController=(req,res)=>{
+    res.send('protected Route')
 }
