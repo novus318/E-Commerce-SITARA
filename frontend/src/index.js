@@ -4,13 +4,16 @@ import App from './App';
 import User from './store/userContext';
 import { googleId } from './api credentials/Api'
 import {GoogleOAuthProvider} from '@react-oauth/google'
+import { AuthProvider } from './store/authContext';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
+    <AuthProvider>
     <GoogleOAuthProvider clientId={googleId}>
     <User>
     <App />
     </User>
     </GoogleOAuthProvider>
+    </AuthProvider>
 );

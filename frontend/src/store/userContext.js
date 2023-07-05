@@ -1,10 +1,11 @@
 import {createContext, useEffect, useState} from 'react'
 import axios from 'axios'
+import { useAuth } from '../store/authContext';
 export const UserContext=createContext(null)
 function User({children}){
 const [user,setUser] = useState()
-
 const [profile, setProfile] = useState([])
+const[auth,setAuth]=useAuth()
 useEffect(
     () => {
         if (user) {
@@ -16,17 +17,20 @@ useEffect(
                     }
                 })
                 .then((res) => {
-                    setProfile(res.data);
+                    setProfile(res.data)
                 })
                 .catch((err) => console.log(err));
         }
-    },
-    [ user ]
+    }
 )
+    
     return(
-    <UserContext.Provider value={{profile,setUser,setProfile}}>
+    <UserContext.Provider value={{profile,setUser}}>
+        
         {children}
+        
     </UserContext.Provider>
     )
 }
+
 export default User;

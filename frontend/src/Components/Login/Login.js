@@ -15,22 +15,46 @@ import {
   MDBInput,
   MDBCheckbox
 } from 'mdb-react-ui-kit';
-import { UserContext } from '../../store/userContext';
+import {  UserContext } from '../../store/userContext';
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import toast from 'react-hot-toast'
+import { useAuth } from '../../store/authContext';
 
 function Login() {
   const [justifyActive, setJustifyActive] = useState('login');
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [email2, setEmail2] = useState('')
+  const [password2, setPassword2] = useState('')
   const [name, setName] = useState('')
   const [phone, setPhone] = useState('')
   const navigate = useNavigate()
+  const[auth,setAuth]=useAuth()
   const handleLogin=async(e)=>{
     e.preventDefault()
-    
+    try{
+      const res=await axios.post('/api/v1/auth/login',{
+        email2,password2
+      })
+      if(res &&res.data.success){
+        toast.success(res.data.message)
+        setAuth({
+          ...auth,
+          user:res.data.user,
+          token:res.data.token
+        })
+        localStorage.setItem('auth',JSON.stringify(res.data))
+        navigate('/')
+      }else{
+        toast.error(res.data.message)
+      }
+    }
+    catch(e){
+      console.log(e)
+      toast.error('something went wrong')
+    }
    
      
   }
@@ -40,6 +64,12 @@ function Login() {
       const res=await axios.post('/api/v1/auth/signup',{name,email,password,phone})
       if(res &&res.data.success){
         toast.success(res.data.message)
+        setAuth({
+          ...auth,
+          user:res.data.user,
+          token:res.data.token
+        })
+        localStorage.setItem('auth',JSON.stringify(res.data))
         navigate('/')
       }else{
         toast.error(res.data.message)
@@ -54,14 +84,15 @@ function Login() {
   const login = useGoogleLogin({
     onSuccess: (codeResponse) => {
       setUser(codeResponse)
-      history('/')
+      toast.success('LoggedIn Successfully')
+      navigate('/')
     },
-    onError: (error) => console.log('Login Failed:', error)
+    onError: (error) => 
+    toast.error('something went wrong')
   });
-  const history = useNavigate()
   const responseFacebook = (response) => {
-    setUser(response);
-    history('/')
+    console.log(response);
+    navigate('/')
   }
   const handleJustifyClick = (value) => {
     if (value === justifyActive) {
@@ -111,8 +142,8 @@ function Login() {
               </div>
             </div>
             <form className='text-center' action='POST' onSubmit={handleLogin}>
-              <MDBInput wrapperClass='mb-4'  placeholder='E-mail address' type='email' />
-              <MDBInput wrapperClass='mb-4'  placeholder='Password' type='password' />
+              <MDBInput wrapperClass='mb-4' onChange={(e)=>{setEmail2(e.target.value)}} placeholder='E-mail address' type='email' />
+              <MDBInput wrapperClass='mb-4' onChange={(e)=>{setPassword2(e.target.value)}} placeholder='Password' type='password' />
 
               <div className="d-flex mx-4 mb-4">
                 <a href="!#">Forgot ?</a>

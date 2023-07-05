@@ -41,10 +41,16 @@ try {
     const hashedPassword=await hashPassword(password)
     //save
     const user = await new userModel({name,email,phone,password:hashedPassword}).save()
+    const token= await JWT.sign({_id:user._id},process.env.JWT_SECRET,{expiresIn:"7d"});
     res.status(201).send({
         success:true,
         message:'User Registered successfully',
-        user
+        user:{
+            name:user.name,
+            email:user.email,
+            phone:user.phone
+        },
+        token
     })
 } catch (error) {
     console.log(error)
@@ -58,7 +64,8 @@ try {
 }
 export const loginController=async(req,res)=>{
     try {
-        const {email,password}=req.body
+        const email=req.body.email2
+        const password=req.body.password2
         //validate
         if(!email||!password){
             return res.status(406).send({
@@ -101,6 +108,34 @@ export const loginController=async(req,res)=>{
             error
         })
     }
+}
+export const googleController=async(req,res)=>{
+    try {
+        const {email,name}=req.body
+        const user=await userModel.findOne({email})
+        if(user){
+            res.status(201).send({
+                success:true,
+                message:'login successfully',
+                user
+            })
+        }
+        if(!user){
+         new userModel({email,name}).save()
+        res.status(201).send({
+            success:true,
+            message:'login successfully',
+            user
+        })}
+    } catch (error) {
+        console.log(error)
+        res.status(500).send({
+            success:false,
+            message:"Error",
+            error
+        })
+    }
+
 }
 //text controller
 export const testController=(req,res)=>{
