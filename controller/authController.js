@@ -5,7 +5,7 @@ import JWT from 'jsonwebtoken'
 
 export const signupController=async(req,res)=>{
 try {
-    const {name,email,password,phone}=req.body
+    const {name,email,password,phone,question}=req.body
     //valudate
     if(!name){
         return res.send({
@@ -27,6 +27,11 @@ try {
             message:"phone number is required"
         })
     }
+    if(!question){
+        return res.send({
+            message:"answer is required"
+        })
+    }
 
     //check user
     const existingUser=await userModel.findOne({email})
@@ -40,7 +45,7 @@ try {
     //register user
     const hashedPassword=await hashPassword(password)
     //save
-    const user = await new userModel({name,email,phone,password:hashedPassword}).save()
+    const user = await new userModel({name,email,phone,password:hashedPassword,question}).save()
     const token= await JWT.sign({_id:user._id},process.env.JWT_SECRET,{expiresIn:"7d"});
     res.status(201).send({
         success:true,
@@ -96,7 +101,8 @@ export const loginController=async(req,res)=>{
             user:{
                 name:user.name,
                 email:user.email,
-                phone:user.phone
+                phone:user.phone,
+                role:user.role
             },
             token
         })
@@ -136,6 +142,49 @@ export const googleController=async(req,res)=>{
         })
     }
 
+}
+//forgot password
+export const forgotPasswordController=async(req,res)=>{
+try {
+    const {email,question,newPassword}=req.body
+    if(!email){
+        res.status(400).send({
+            message:'Email is required'
+        })
+    }
+    if(!question){
+        res.status(400).send({
+            message:'Answer is required'
+        })
+    }
+    if(!newPassword){
+        res.status(400).send({
+            message:'Password is required'
+        })
+    }
+    //check
+    const user=await userModel.findOne({email,question})
+    //validate
+    if(!user){
+        return res.status(404).send({
+            success:false,
+            message:'wrong Email or Answer'
+        })
+    }
+    const hashed=await hashPassword(newPassword)
+    await userModel.findByIdAndUpdate(user._id,{password:hashed})
+    res.status(200).send({
+        success:true,
+        message:'Password Reset Successfully'
+    })
+} catch (error) {
+    console.log(error)
+    res.status(500).send({
+        success:false,
+        massage:'Something went wrong',
+        error
+    })
+}
 }
 //text controller
 export const testController=(req,res)=>{

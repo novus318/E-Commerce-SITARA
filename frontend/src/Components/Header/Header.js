@@ -7,7 +7,7 @@ import { useAuth } from '../../store/authContext';
 import toast from 'react-hot-toast';
 import { useContext } from 'react';
 import { UserContext } from '../../store/userContext';
-import axios from 'axios';
+
 function Header() {
   const {profile}=useContext(UserContext)
   
@@ -30,7 +30,7 @@ return (
       className="shadow"
       fixed="top"
     >
-      <Navbar.Brand className='ms-4 mb-2' ><img className='logo' src={Logo}alt='logo'/></Navbar.Brand>
+      <Navbar.Brand className='ms-4 mb-2' ><Link to ='/'><img className='logo' src={Logo}alt='logo'/></Link></Navbar.Brand>
       <Navbar.Toggle className='toggler' aria-controls="responsive-navbar-nav"/>
       <Navbar.Collapse className='colapsed' id="responsive-navbar-nav">
       <div className='ms-auto ps-3'>
@@ -47,7 +47,8 @@ return (
           <MDBIcon className='pt-3 pb-3' icon='user-alt' size='lg' />
           </Dropdown.Toggle>
           <Dropdown.Menu>
-          <Dropdown.Item className='profile' ><Link className='a-link' to='/profile'>Profile</Link></Dropdown.Item>
+          <Dropdown.Item className='profile' ><Link className='a-link' to='/'>Home</Link></Dropdown.Item>
+          <Dropdown.Item className='profile' ><Link className='a-link' to={`${auth?.user?.role ===1?'/admin':'/profile'}`}>Profile</Link></Dropdown.Item>
           <Dropdown.Item onClick={handleLogout} ><Link to='/login'><MDBIcon icon='sign-out-alt' size='lg'className='logout' /></Link></Dropdown.Item>
           </Dropdown.Menu>
           </Dropdown></div>:

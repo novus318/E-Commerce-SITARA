@@ -14,7 +14,10 @@ color: #fff;
 margin-bottom: 1em;
 }
 a{
-    color: #656565;
+    color: #4096dd;
+    cursor: pointer;
+    font-weight: 600;
+    font-family: Netflix Sans,Helvetica Neue,Segoe UI,Roboto,Ubuntu,sans-serif;
 }
 .register{
     font-weight: 600;

@@ -17,7 +17,7 @@ import {
 } from 'mdb-react-ui-kit';
 import {  UserContext } from '../../store/userContext';
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import toast from 'react-hot-toast'
 import { useAuth } from '../../store/authContext';
@@ -30,8 +30,10 @@ function Login() {
   const [password2, setPassword2] = useState('')
   const [name, setName] = useState('')
   const [phone, setPhone] = useState('')
+  const [question, setQuestion] = useState('')
   const navigate = useNavigate()
   const[auth,setAuth]=useAuth()
+  const location=useLocation()
   const handleLogin=async(e)=>{
     e.preventDefault()
     try{
@@ -46,7 +48,7 @@ function Login() {
           token:res.data.token
         })
         localStorage.setItem('auth',JSON.stringify(res.data))
-        navigate('/')
+        navigate(location.state ||'/')
       }else{
         toast.error(res.data.message)
       }
@@ -61,7 +63,7 @@ function Login() {
   const handleSignup=async(e)=>{
     e.preventDefault()
     try{
-      const res=await axios.post('/api/v1/auth/signup',{name,email,password,phone})
+      const res=await axios.post('/api/v1/auth/signup',{name,email,password,phone,question})
       if(res &&res.data.success){
         toast.success(res.data.message)
         setAuth({
@@ -70,7 +72,7 @@ function Login() {
           token:res.data.token
         })
         localStorage.setItem('auth',JSON.stringify(res.data))
-        navigate('/')
+        navigate(location.state ||'/')
       }else{
         toast.error(res.data.message)
       }
@@ -146,7 +148,9 @@ function Login() {
               <MDBInput wrapperClass='mb-4' onChange={(e)=>{setPassword2(e.target.value)}} placeholder='Password' type='password' />
 
               <div className="d-flex mx-4 mb-4">
-                <a href="!#">Forgot ?</a>
+                <a onClick={()=>{
+                  navigate('/forgot-password')
+                }}>Forgot ?</a>
               </div>
               <MDBBtn className='btn-login col-12'>Login</MDBBtn>
             </form>
@@ -182,8 +186,11 @@ function Login() {
               <MDBInput wrapperClass='mb-4' onChange={(e)=>{setEmail(e.target.value)}} placeholder='Email' type='email' />
               <MDBInput wrapperClass='mb-4' onChange={(e)=>{setPassword(e.target.value)}} placeholder='Password' type='password' />
               <MDBInput wrapperClass='mb-4' onChange={(e)=>{setPhone(e.target.value)}} placeholder='Phone number' type='tel' />
-              <div className='d-flex mb-4'>
+              <MDBInput wrapperClass='mb-2' onChange={(e)=>{setQuestion(e.target.value)}} placeholder='Your Favorite person ?' type='text' />
+              <div className='mb-4'>
+                <p>* Do not forget the answer you can't reset your Password</p>
                 <MDBCheckbox name='flexCheck' label='I have read and agree to the terms' />
+                
               </div>
 
               <MDBBtn className="mb-4 w-100 btn-login">Sign up</MDBBtn>
