@@ -1,0 +1,20 @@
+.s-btn{
+    height: 2em;
+}
+a{
+    text-decoration: none;
+}
+.fas{
+    color: #656565;
+    
+}
+.log{
+    width: 8em;
+    margin-bottom: 1em;
+    margin-top: 1em;
+}
+.head-t{
+    font-family: Netflix Sans,Helvetica Neue,Segoe UI,Roboto,Ubuntu,sans-serif;
+    color: #656565;
+    font-weight: 600;
+}

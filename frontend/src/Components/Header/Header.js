@@ -41,18 +41,19 @@ return (
       </div>
         <div className='ms-auto'>
         <Nav className="ms-2 me-2 ">
-        {auth.user ?<div className='ps-3 me-3'> 
+        {auth.user ?<div className='pe-2 me-5'> 
            <Dropdown>
             <Dropdown.Toggle>
           <MDBIcon className='pt-3 pb-3' icon='user-alt' size='lg' />
           </Dropdown.Toggle>
-          <Dropdown.Menu>
+          <Dropdown.Menu > 
           <Dropdown.Item className='profile' ><Link className='a-link' to='/'>Home</Link></Dropdown.Item>
           <Dropdown.Item className='profile' ><Link className='a-link' to={`${auth?.user?.role ===1?'/admin':'/profile'}`}>Profile</Link></Dropdown.Item>
           <Dropdown.Item onClick={handleLogout} ><Link to='/login'><MDBIcon icon='sign-out-alt' size='lg'className='logout' /></Link></Dropdown.Item>
           </Dropdown.Menu>
           </Dropdown></div>:
           <div className='ps-3 pt-2'><Link className='a-link' to='/login'>Login</Link></div>}
+          {auth?.user?.role===0 &&
           <div className='mb-2'> 
           <Dropdown><Dropdown.Toggle>Categories</Dropdown.Toggle>
           <Dropdown.Menu>
@@ -62,7 +63,7 @@ return (
           <Dropdown.Item>Item4</Dropdown.Item>
           <Dropdown.Item>Item5</Dropdown.Item>
           </Dropdown.Menu></Dropdown>
-          </div>
+          </div>}
         </Nav>
         </div> 
       </Navbar.Collapse>
