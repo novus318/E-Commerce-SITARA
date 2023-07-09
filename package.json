@@ -7,7 +7,7 @@
   "scripts": {
     "start": "node server.js",
     "server": "nodemon server.js",
-    "client":"npm start --prefix ./frontend",
+    "client": "npm start --prefix ./frontend",
     "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "repository": {
@@ -31,6 +31,7 @@
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^7.3.1",
     "morgan": "^1.10.0",
-    "nodemon": "^2.0.22"
+    "nodemon": "^2.0.22",
+    "slugify": "^1.6.6"
   }
 }

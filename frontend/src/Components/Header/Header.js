@@ -48,12 +48,13 @@ return (
           </Dropdown.Toggle>
           <Dropdown.Menu > 
           <Dropdown.Item className='profile' ><Link className='a-link' to='/'>Home</Link></Dropdown.Item>
-          <Dropdown.Item className='profile' ><Link className='a-link' to={`${auth?.user?.role ===1?'/admin':'/profile'}`}>Profile</Link></Dropdown.Item>
+          <Dropdown.Item className='profile' ><Link className='a-link' to={`${auth?.user?.role ===1?'/admin':'/user/profile'}`}>Profile</Link></Dropdown.Item>
+          {auth?.user?.role===0&&<Dropdown.Item className='profile' ><Link className='a-link' to='/user/orders'>Orders</Link></Dropdown.Item>}
           <Dropdown.Item onClick={handleLogout} ><Link to='/login'><MDBIcon icon='sign-out-alt' size='lg'className='logout' /></Link></Dropdown.Item>
           </Dropdown.Menu>
           </Dropdown></div>:
           <div className='ps-3 pt-2'><Link className='a-link' to='/login'>Login</Link></div>}
-          {auth?.user?.role===0 &&
+          {auth?.user?.role===1 ?'':
           <div className='mb-2'> 
           <Dropdown><Dropdown.Toggle>Categories</Dropdown.Toggle>
           <Dropdown.Menu>

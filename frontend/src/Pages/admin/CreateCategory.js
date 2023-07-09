@@ -1,16 +1,13 @@
 import './AdminDashboard.css'
-import Logo from '../../assets/images/logo.png'
 import React from 'react'
 import MenuSidebar from './Sidebar'
-import { Link } from 'react-router-dom'
-function AdminDashboard() {
-  
+function CreateCategory() {
   return (
     <>
       <div className="d-flex">
         <MenuSidebar/>
     <div className="m-auto text-center">
-    <Link to ='/'><img className='log' src={Logo}alt='logo'/></Link>
+    <h1>Category</h1>
 
 
     </div>
@@ -19,4 +16,4 @@ function AdminDashboard() {
   )
 }
 
-export default AdminDashboard
+export default CreateCategory
