@@ -17,7 +17,7 @@ import {
 } from 'mdb-react-ui-kit';
 import {  UserContext } from '../../store/userContext';
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import toast from 'react-hot-toast'
 import { useAuth } from '../../store/authContext';
@@ -148,9 +148,7 @@ function Login() {
               <MDBInput wrapperClass='mb-4' onChange={(e)=>{setPassword2(e.target.value)}} placeholder='Password' type='password' />
 
               <div className="d-flex mx-4 mb-4">
-                <a onClick={()=>{
-                  navigate('/forgot-password')
-                }}>Forgot ?</a>
+                <Link to='/forgot-password'>Forgot ?</Link>
               </div>
               <MDBBtn className='btn-login col-12'>Login</MDBBtn>
             </form>

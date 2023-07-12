@@ -1,0 +1,22 @@
+.btn-form{
+    background: #656565;
+    color: #fff;
+    font-size: 1em;
+    margin-bottom: 2em;
+    margin-top: 0.6em;  
+    height: 2.3em;
+    width:  3em;  
+}
+.form-icon{
+    color: #fff;
+}
+.btn-form:hover .form-icon{
+    color: #656565;
+}
+.btn-form:hover{
+    background: #fff;
+    color: #656565;
+    font-size: 1em;
+    margin-bottom: 2em;
+    margin-top: 0.6em;    
+}

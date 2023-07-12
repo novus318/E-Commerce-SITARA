@@ -5,8 +5,7 @@ a{
     text-decoration: none;
 }
 .fas{
-    color: #656565;
-    
+    color: #656565; 
 }
 .log{
     width: 8em;
@@ -17,4 +16,28 @@ a{
     font-family: Netflix Sans,Helvetica Neue,Segoe UI,Roboto,Ubuntu,sans-serif;
     color: #656565;
     font-weight: 600;
+}
+.head{
+    color: #656565;
+    font-family: Netflix Sans,Helvetica Neue,Segoe UI,Roboto,Ubuntu,sans-serif;
+}
+.name{
+    font-weight: 600;
+    font-family: Netflix Sans,Helvetica Neue,Segoe UI,Roboto,Ubuntu,sans-serif;
+    color: #656565;
+    text-transform: uppercase;
+    
+}
+.action-icon{
+    color: #fff;
+}
+.action-btn:hover .action-icon{
+    color: #656565;
+}
+.action-btn{
+    background-color: #656565;
+    color: #fff;
+    font-size: 0.8em;
+    height: 2.3em;
+    width: 6em;
 }
