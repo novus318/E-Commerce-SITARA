@@ -41,3 +41,21 @@ a{
     height: 2.3em;
     width: 6em;
 }
+.form-btn{
+    background: #656565;
+    color: #fff;
+    height: 2em;
+    width: 100%;
+}
+.form-btn:hover{
+    background: #fff;
+    color: #656565;
+    height: 2em;
+    width: 100%;
+}
+.head-p{
+    color: #656565;
+}
+.head-p:hover{
+    color: #656565;
+}

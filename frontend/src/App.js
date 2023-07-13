@@ -14,6 +14,7 @@ import CreateProduct from './Pages/admin/CreateProduct';
 import Users from './Pages/admin/Users';
 import Orders from './Pages/admin/Orders';
 import UserOrders from './Components/Orders/Orders'
+import Products from './Pages/admin/Products';
 function App() {
   
   return (
@@ -29,9 +30,10 @@ function App() {
         <Route exact path='/user/orders' element={ <UserOrders/>}/>
         </Route>
         <Route exact path='/admin' element={ <AdminRoute/>}>
-        <Route exact path='' element={ <AdminDashboard/>}/>
+        <Route exact path='/admin' element={ <AdminDashboard/>}/>
         <Route exact path='/admin/create-category' element={ <CreateCategory/>}/>
         <Route exact path='/admin/create-product' element={ <CreateProduct/>}/>
+        <Route exact path='/admin/products' element={ <Products/>}/>
         <Route exact path='/admin/users' element={ <Users/>}/>
         <Route exact path='/admin/orders' element={ <Orders/>}/>
         </Route>

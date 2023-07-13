@@ -1,11 +1,10 @@
 import {createContext, useEffect, useState} from 'react'
 import axios from 'axios'
-import { useAuth } from '../store/authContext';
+
 export const UserContext=createContext(null)
 function User({children}){
 const [user,setUser] = useState()
 const [profile, setProfile] = useState([])
-const[auth,setAuth]=useAuth()
 useEffect(
     () => {
         if (user) {

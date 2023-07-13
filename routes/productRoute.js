@@ -7,7 +7,7 @@ import ExpressFormidable from "express-formidable";
 const router = express.Router()
 
 //routes
-router.post('/create-product',requireSignIn,isAdmin,ExpressFormidable(),createProductController)
+router.post('/create-product',ExpressFormidable(),createProductController)
 
 //get products
 router.get('/get-product',getProductController)
