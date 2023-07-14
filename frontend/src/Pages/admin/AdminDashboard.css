@@ -59,3 +59,9 @@ a{
 .head-p:hover{
     color: #656565;
 }
+.delete-btn{
+    background: #d66767;
+    color: #fff;
+    height: 2em;
+    width: 100%;
+}
