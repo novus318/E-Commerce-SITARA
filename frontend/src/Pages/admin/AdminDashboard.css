@@ -65,3 +65,6 @@ a{
     height: 2em;
     width: 100%;
 }
+.btn-secondary:hover{
+background-color: #77bd88;
+}

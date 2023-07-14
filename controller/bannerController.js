@@ -40,7 +40,7 @@ export const updateBannerController=async(req,res)=>{
                 data :fs.readFileSync(banner.path),
                 contentType :banner.type
             }
-        },{new:true}).save()
+        },{new:true})
         res.status(201).send({
             success:true,
             message:'banner Updated successfully',
