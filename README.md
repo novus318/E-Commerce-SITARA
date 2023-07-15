@@ -10,8 +10,8 @@ FRONTEND:
 REACT
 
 usage:
- > clone the project
- > install npm packages
- > fill .env file
- > command
+ > clone the project,
+ > install npm packages,
+ > fill .env file,
+ > command :
     npm run dev
