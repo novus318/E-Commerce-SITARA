@@ -1,0 +1,23 @@
+.upper{
+    text-transform: uppercase;
+}
+.results{
+    color: #6565;
+    font-family: Netflix Sans,Helvetica Neue,Segoe UI,Roboto,Ubuntu,sans-serif;
+    font-weight: 600;
+}
+.price{
+    font-family: Netflix Sans,Helvetica Neue,Segoe UI,Roboto,Ubuntu,sans-serif;
+    color: #656565;
+    font-weight: 600;
+    font-size: 1.5rem;
+}
+.des{
+    color: #656565;
+    font-family: Netflix Sans,Helvetica Neue,Segoe UI,Roboto,Ubuntu,sans-serif;
+}
+.category{
+    text-transform: uppercase;
+    color: #656565;
+    font-weight: 700;
+}

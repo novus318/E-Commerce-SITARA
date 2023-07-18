@@ -82,7 +82,7 @@ function UpdateBanner() {
                     <img
                       src={`http://localhost:8080/api/v1/banner/get-banner/${b._id}`}
                       alt="banner"
-                      width={"200em"}
+                      width={"100%"}
                       className="img img-responsive"
                     />
                   </div>

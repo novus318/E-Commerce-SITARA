@@ -1,70 +1,93 @@
 .s-btn{
-    height: 2em;
+    height: 2em!important;
 }
 a{
-    text-decoration: none;
+    text-decoration: none!important;
 }
 .fas{
-    color: #656565; 
+    color: #656565!important; 
 }
 .log{
-    width: 8em;
-    margin-bottom: 1em;
-    margin-top: 1em;
+    width: 8em!important;
+    margin-bottom: 1em!important;
+    margin-top: 1em!important;
 }
 .head-t{
-    font-family: Netflix Sans,Helvetica Neue,Segoe UI,Roboto,Ubuntu,sans-serif;
-    color: #656565;
-    font-weight: 600;
+    font-family: Netflix Sans,Helvetica Neue,Segoe UI,Roboto,Ubuntu,sans-serif!important;
+    color: #656565!important;
+    font-weight: 600!important;
 }
 .head{
-    color: #656565;
-    font-family: Netflix Sans,Helvetica Neue,Segoe UI,Roboto,Ubuntu,sans-serif;
+    color: #656565!important;
+    font-family: Netflix Sans,Helvetica Neue,Segoe UI,Roboto,Ubuntu,sans-serif!important;
 }
 .name{
-    font-weight: 600;
-    font-family: Netflix Sans,Helvetica Neue,Segoe UI,Roboto,Ubuntu,sans-serif;
-    color: #656565;
-    text-transform: uppercase;
+    font-weight: 600!important;
+    font-family: Netflix Sans,Helvetica Neue,Segoe UI,Roboto,Ubuntu,sans-serif!important;
+    color: #656565!important;
+    text-transform: uppercase!important;
     
 }
 .action-icon{
-    color: #fff;
+    color: #fff!important;
 }
 .action-btn:hover .action-icon{
-    color: #656565;
+    color: #656565!important;
 }
 .action-btn{
-    background-color: #656565;
-    color: #fff;
-    font-size: 0.8em;
-    height: 2.3em;
-    width: 6em;
+    background-color: #656565 !important;
+    color: #fff !important;
+    font-size: 0.8em !important;
+    height: 2.3em !important;
+    width: 6em !important;
 }
-.form-btn{
-    background: #656565;
-    color: #fff;
-    height: 2em;
-    width: 100%;
+.action-btn:hover{
+background-color: #fff !important;
+color: #656565 !important;
 }
-.form-btn:hover{
-    background: #fff;
-    color: #656565;
-    height: 2em;
-    width: 100%;
+.btn-form{
+    outline: none;
+    background-color: #656565!important;
+    color: #fff!important;
+    height: 1.8em!important;
+    width: 2.5em!important;
+}
+.btn-form:hover{
+    background: #fff!important;
+    color: #656565!important;
+    height: 1.8em!important;
+    width: 2.5em!important;
+}
+.btn-form:hover .form-icon{
+    color: #656565 !important;
+}
+.form-icon{
+color: #fff !important;
 }
 .head-p{
-    color: #656565;
+    color: #656565!important;
 }
 .head-p:hover{
-    color: #656565;
+    color: #656565!important;
 }
 .delete-btn{
-    background: #d66767;
-    color: #fff;
-    height: 2em;
-    width: 100%;
+    background: #d66767!important;
+    color: #fff!important;
+    height: 2.3em!important;
+    width: 100%!important;
 }
 .btn-secondary:hover{
-background-color: #77bd88;
+background-color: #77bd88!important;
+}
+.update-btn{
+    width: 100% !important;
+    height: 2.3em !important;
+    background-color: #656565 !important;
+    color: #fff !important;
+}
+.update-btn:hover{
+    width: 100% !important;
+    height: 2.3em !important;
+    background-color: #ffffff !important;
+    color: #656565 !important;
 }

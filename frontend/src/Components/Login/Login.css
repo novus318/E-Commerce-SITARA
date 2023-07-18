@@ -9,10 +9,14 @@
 }
 
 .btn-login{
-background-color: #656565;
-color: #fff;
-margin-bottom: 1em;
-height: 2em;
+background-color: #656565 !important;
+color: #fff !important;
+margin-bottom: 1em !important;
+height: 2em !important;
+}
+.btn-login:hover{
+background-color: #fff !important;
+color: #656565 !important;
 }
 a{
     color: #4096dd;

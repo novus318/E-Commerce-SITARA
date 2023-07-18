@@ -47,13 +47,13 @@ function UpdateProduct() {
     try {
         const {data}=await axios.get(`/api/v1/product/get-product/${params.slug}`)
         setName(data.product.name)
+        setId(data.product._id)
         setDescription(data.product.description)
         setPrice(data.product.price)
         setCategory(data.product.category._id)
         setQuantity(data.product.quantity)
         setName(data.product.name)
         setShipping(data.product.shipping)
-        setId(data.product._id)
     } catch (error) {
         console.log(error)
     }
@@ -128,7 +128,7 @@ const handleDelete =async()=>{
             </div>
         ):(
             <div>
-              <img src={`/api/v1/product/product-photo/${id}`} alt={name} height={'100em'} className='img img-responsive' />
+              <img src={`http://localhost:8080/api/v1/product/product-photo/${id}`} alt={name} height={'100em'} className='img img-responsive' />
               </div>
           )}
     </div>
@@ -146,7 +146,7 @@ const handleDelete =async()=>{
     </Select>
     </div>
     <div className='mb-3'>
-      <MDBBtn className='form-btn ' onClick={handleUpdate}>Update Product</MDBBtn>
+      <MDBBtn className='update-btn' onClick={handleUpdate}>Update Product</MDBBtn>
     </div>
     <div className='mb-5'>
       <MDBBtn className='delete-btn ' onClick={handleDelete}>Delete Product</MDBBtn>

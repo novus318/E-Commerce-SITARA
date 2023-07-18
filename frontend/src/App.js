@@ -17,6 +17,10 @@ import UserOrders from './Components/Orders/Orders'
 import Products from './Pages/admin/Products';
 import UpdateProduct from './Pages/admin/UpdateProduct';
 import UpdateBanner from './Pages/admin/UpdateBanner';
+import AllProducts from './Pages/AllProducts';
+import Search from './Components/Search';
+import SearchProducts from './Pages/SearchProducts';
+import ProductDetails from './Pages/ProductDetails';
 function App() {
   
   return (
@@ -25,8 +29,11 @@ function App() {
         <Routes>
         <Route exact path='/' element={ <Home/>}/>
         <Route exact path='*' element={ <PageNot/>}/>
+        <Route exact path='/search' element={ <SearchProducts/>}/>
+        <Route exact path='/product/:slug' element={ <ProductDetails/>}/>
         <Route exact path='/login' element={ <Login/>}/>
         <Route exact path='/forgot-password' element={ <ForgotPassword/>}/>
+        <Route exact path='/products/:pid' element={ <AllProducts/>}/>
         <Route exact path='/user' element={ <PrivateRoute/>}>
         <Route exact path='/user/profile' element={ <Profile/>}/>
         <Route exact path='/user/orders' element={ <UserOrders/>}/>

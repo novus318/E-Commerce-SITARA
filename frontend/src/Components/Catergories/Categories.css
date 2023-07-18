@@ -3,6 +3,8 @@
 }
 .t{
     font-family:  Netflix Sans,Helvetica Neue,Segoe UI,Roboto,Ubuntu,sans-serif;
+    color: #666666;
+    font-weight: 800;
 }
 .h{
     color: #353535;
@@ -37,4 +39,7 @@
 .card:hover .card-title1{
     transform: translateY(400%);
     color: #353535;
+}
+.card:hover .t{
+    color: #ffffff;
 }

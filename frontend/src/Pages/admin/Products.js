@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 
 function Products() {
     const [products, setProducts] = useState([])
-    //get all category
+    //get all product
 const getAllProduct=async()=>{
     try {
       const {data}=await axios.get('/api/v1/product/get-product')
@@ -31,7 +31,7 @@ const getAllProduct=async()=>{
     <div className='row'>
         {products?.map(p =>(
            
-            <div className="product-card">
+            <div className="product-card mb-3">
            <Link key={p._id} to={`/admin/products/${p.slug}`}>
             <div className="product-tumb">
                 <img className='p-img' src={`http://localhost:8080/api/v1/product/product-photo/${p._id}`} alt={p.name}/>

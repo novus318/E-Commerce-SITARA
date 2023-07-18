@@ -64,7 +64,6 @@ padding: 0.8em;
 	border: none;
 	font-family: Netflix Sans,Helvetica Neue,Segoe UI,Roboto,Ubuntu,sans-serif;
 	font-weight: 600;
-	font-size: 1.4em;
 	color: #646464;
 	margin-top: 2px;
  }
@@ -83,40 +82,33 @@ padding: 0.8em;
 	background: none;
 	color: #646464;
  }
- /*search*/
- .search{
- position: relative;
- width: 4em;
-  border-radius: 1em;
-  cursor: pointer;
-  color: #646464;
-  background-color: #646464;
-  transition: width 0.4s ease;
-	border: none;
-  
-  &:focus{width: 20em;
-	color: #ffffff;
-	font-size: 16px;
-	font-weight: 500;
-	letter-spacing:0.3em;
-	text-align: center;
-	font-family: Netflix Sans,Helvetica Neue,Segoe UI,Roboto,Ubuntu,sans-serif;
-	border: none;
-	cursor: text;
-	border-radius: 0.9em;
-	transition: width 0.4s ease;
-	outline: none;}
-}
+
 .dropdown-menu{
 	background-color: #fefbfc;
 	border: none;
 	--bs-dropdown-link-active-bg:none;
 } 
 .s{
-	position: relative;
-	left: -2.5em;
-	color: #fffdfd;
+	border: none;
+	background-color: #fefbfc;
+	
+	
 }
-.s:hover{
+.cat{
+	text-decoration: none;
+	text-transform: uppercase;
+	font-weight: 600;
+	color: #646464;
 	cursor: pointer;
+}
+.drop-item:hover .cat{
+	color: #ffffff;
+}
+.srch{
+	border-radius: 0.8em !important;
+}
+.srch:focus{
+	outline: none !important;
+	border: solid 0.1em #646464 !important;
+	box-shadow: none !important;
 }
