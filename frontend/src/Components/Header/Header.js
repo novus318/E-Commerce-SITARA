@@ -8,11 +8,14 @@ import toast from 'react-hot-toast';
 import {  useEffect, useState } from 'react';
 import axios from 'axios';
 import Search from '../Search';
+import { useCart } from '../../store/CartContext';
+import { Badge} from 'antd'
 
 function Header() {
  
   
 const[auth,setAuth]=useAuth()
+const[cart]=useCart()
 const handleLogout=()=>{
 setAuth({
   ...auth,
@@ -60,16 +63,19 @@ return (
           <MDBIcon className='pt-2 pb-2' icon='user-alt' size='2x' />
           </Dropdown.Toggle>
           <Dropdown.Menu > 
-          <Dropdown.Item className='profile' ><Link className='a-link' to='/'>Home</Link></Dropdown.Item>
-          <Dropdown.Item className='profile' ><Link className='a-link' to={`${auth?.user?.role ===1?'/admin':'/user/profile'}`}>Profile</Link></Dropdown.Item>
-          {auth?.user?.role===0&&<Dropdown.Item className='profile' ><Link className='a-link' to='/user/orders'>Orders</Link></Dropdown.Item>}
+          <Dropdown.Item className='drop-item' ><Link className='cat' to='/'>Home</Link></Dropdown.Item>
+          <Dropdown.Item className='drop-item' ><Link className='cat' to={`${auth?.user?.role ===1?'/admin':'/user/profile'}`}>Profile</Link></Dropdown.Item>
+          {auth?.user?.role===0&& (<><Dropdown.Item className='drop-item' ><Link className='cat' to='/user/orders'>Orders</Link></Dropdown.Item>
+          <Dropdown.Item className='drop-item' ><Badge size='small' count={cart?.length} color='#656565' showZero>
+          <Link className='cat' to='/user/cart'>Cart '</Link>
+    </Badge></Dropdown.Item></>)}
           <Dropdown.Item onClick={handleLogout} ><Link to='/login'><MDBIcon icon='sign-out-alt' size='lg'className='logout' /></Link></Dropdown.Item>
           </Dropdown.Menu>
           </Dropdown></div>:
-          <div className='ps-3 pt-2'><Link className='a-link' to='/login'>Login</Link></div>}
+          <div className='ps-3 pt-2 mt-1'><Link className='a-link' to='/login'>Login</Link></div>}
           {auth?.user?.role===1 ?'':
           <div className='mb-2'> 
-          <Dropdown><Dropdown.Toggle className='a-link'>Categories</Dropdown.Toggle>
+          <Dropdown className='mt-1'><Dropdown.Toggle className='a-link'>Categories</Dropdown.Toggle>
           <Dropdown.Menu>{categories.map(c =>(<>
             <Dropdown.Item className='drop-item' key={c._id}><Link to={`/products/${c._id}`} className='cat'>{c.name}</Link></Dropdown.Item>
           </>))}   

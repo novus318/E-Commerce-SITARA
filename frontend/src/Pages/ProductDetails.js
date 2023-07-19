@@ -4,15 +4,55 @@ import { useParams } from 'react-router-dom'
 import { ThreeCircles } from  'react-loader-spinner'
 import axios from 'axios'
 import "./AllProducts.css"
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
+import '../Components/Recomendation/Recomendation.css'
+import { Link } from 'react-router-dom';
+import { useCart } from '../store/CartContext'
+import toast  from 'react-hot-toast'
+import { useAuth } from '../store/authContext'
 
 function ProductDetails() {
     const params=useParams()
     const [product, setProduct] = useState({})
+    const [cart,setCart] =useCart()
+    const [auth]=useAuth()
+    const [similarProducts, setSimilarProducts] = useState([])
+    const responsive = {
+      superLargeDesktop: {
+        // the naming can be any, depends on you.
+        breakpoint: { max: 2000, min: 1100 },
+        items: 5
+      },
+      desktop: {
+        breakpoint: { max: 1000, min: 800 },
+        items: 4
+      },
+      tablet: {
+        breakpoint: { max: 800, min: 400 },
+        items: 2
+      },
+      mobile: {
+        breakpoint: { max: 400, min: 0 },
+        items: 1
+      }
+    }
+
+    //similar products
+    const getSimilarProduct=async(pid,cid)=>{
+      try {
+        const {data}=await axios.get(`/api/v1/product/related-product/${pid}/${cid}`)
+        setSimilarProducts(data.products)
+      } catch (error) {
+        console.log(error)
+      }
+    }
      //get single product
   const getSingleProduct=async()=>{
     try {
         const {data}=await axios.get(`/api/v1/product/get-product/${params?.slug}`)
         setProduct(data?.product)
+        getSimilarProduct(data?.product._id,data?.product.category._id)
     } catch (error) {
         console.log(error)
     }
@@ -33,7 +73,7 @@ function ProductDetails() {
                <div className="row gx-5">
                  <aside className="col-lg-6">
                          <div className='mb-4'>      
-                       <img style={{maxWidth: '100%', maxHeight: '100vh', margin: 'auto'}} className="rounded-4 fit img img-responsive" alt='pic' src={`/api/v1/product/product-photo/${product?._id}`} />
+                       <img style={{maxWidth: '100%', maxHeight: '100h', margin: 'auto'}} className="rounded-4 fit img img-responsive" alt='pic' src={`/api/v1/product/product-photo/${product?._id}`} />
                        </div>
                    <div className="d-flex justify-content-center mb-3">
                      
@@ -89,14 +129,44 @@ function ProductDetails() {
                          </div>
                        </div>
                      </div>
-                     <button className="btn btn-warning shadow-0"> Buy now </button>
-                     <button className="btn btn-primary shadow-0"> <i className="me-1 fa fa-shopping-basket" /> Add to cart </button>
-                     <button className="btn btn-light border border-secondary py-2 icon-hover px-3"> <i className="me-1 fa fa-heart fa-lg" /> Save </button>
+                     <button className="buy-btn p-1 ps-2 pe-2 me-3"><i className="me-1 fa fa-credit-card-alt fa-lg" /> Buy now </button>
+                     {auth?.user?.role===0 && <button className="cart-btn p-1 ps-2 pe-2 me-3" onClick={()=>{
+                      setCart([...cart,product])
+                      localStorage.setItem('cart',JSON.stringify([...cart,product]))
+                      toast.success('Item added to Cart')
+                     }}><i className="me-1 fa fa-cart-plus fa-lg" /> Add to cart </button>}
+                     <button className="cart-btn p-1 ps-2 pe-2"> <i className="me-1 fa fa-heart fa-lg" /> Save </button>
                    </div>
                  </main>
                </div>
              </div>
            </section>
+           <div className='mt-4 mb-4'>
+      <div className='ms-5 mb-4'>
+        <h2 className='head-t'>Similar Products</h2>
+      </div>
+      <div>
+      <Carousel responsive={responsive} className='container-fluid'>
+      {similarProducts?.map(p =>(
+           
+		   <div className="m-auto product-card mb-3">
+		  <Link to={`/product/${p.slug}`} key={p._id}>
+		   <div className="product-tumb">
+			   <img className='p-img' src={`/api/v1/product/product-photo/${p._id}`} alt={p.name}/>
+		   </div>
+		   <div className="product-details">
+			   <div className='p-head'>{p.name}</div>
+			   <p>{p.description.substring(0,40)}...</p>
+			   <div className="product-bottom-details">
+		   <div className="product-price">₹ {p.price}</div>
+			   </div>
+		   </div>
+		   </Link>
+	   </div> 
+	   ))}
+</Carousel>
+    </div>
+    </div>
               </div>
      ):(<ThreeCircles
         height="100"
@@ -110,6 +180,7 @@ function ProductDetails() {
         innerCircleColor=""
         middleCircleColor=""
       />)}
+      
       
     </>
   )

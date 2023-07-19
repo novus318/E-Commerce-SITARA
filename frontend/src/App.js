@@ -18,9 +18,9 @@ import Products from './Pages/admin/Products';
 import UpdateProduct from './Pages/admin/UpdateProduct';
 import UpdateBanner from './Pages/admin/UpdateBanner';
 import AllProducts from './Pages/AllProducts';
-import Search from './Components/Search';
 import SearchProducts from './Pages/SearchProducts';
 import ProductDetails from './Pages/ProductDetails';
+import Cart from './Pages/Cart';
 function App() {
   
   return (
@@ -37,6 +37,7 @@ function App() {
         <Route exact path='/user' element={ <PrivateRoute/>}>
         <Route exact path='/user/profile' element={ <Profile/>}/>
         <Route exact path='/user/orders' element={ <UserOrders/>}/>
+        <Route exact path='/user/cart' element={ <Cart/>}/>
         </Route>
         <Route exact path='/admin' element={ <AdminRoute/>}>
         <Route exact path='/admin' element={ <AdminDashboard/>}/>

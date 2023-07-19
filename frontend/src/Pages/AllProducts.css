@@ -12,6 +12,12 @@
     font-weight: 600;
     font-size: 1.5rem;
 }
+.pric{
+    font-family: Netflix Sans,Helvetica Neue,Segoe UI,Roboto,Ubuntu,sans-serif;
+    color: #252525;
+    font-weight: 600;
+    font-size: 1rem;
+}
 .des{
     color: #656565;
     font-family: Netflix Sans,Helvetica Neue,Segoe UI,Roboto,Ubuntu,sans-serif;
@@ -20,4 +26,41 @@
     text-transform: uppercase;
     color: #656565;
     font-weight: 700;
+}
+.cart-btn{
+    border: solid 0.1em #656565 ;
+    border-radius: 0.4em;
+    color: #656565;
+    font-family: Netflix Sans,Helvetica Neue,Segoe UI,Roboto,Ubuntu,sans-serif;
+    font-weight: 600;
+    background: #fff;
+
+}
+.cart-btn:hover{
+    background-color: #656565;
+    color: #ffffff;
+}
+.buy-btn{
+    border: solid 0.1em #656565 ;
+    border-radius: 0.4em;
+    color: #656565;
+    font-family: Netflix Sans,Helvetica Neue,Segoe UI,Roboto,Ubuntu,sans-serif;
+    font-weight: 600;
+    background: #fae900;
+}
+.buy-btn:hover{
+    background-color: #fff;
+    color: #fae900;
+    border: solid 0.1em #fae900 ;
+}
+.trash-ic{
+    color: #656565 !important;
+    cursor: pointer;
+}
+.trash-ic:hover{
+    color: #e05248 !important;
+}
+.colr{
+    color: #656565;
+    font-family: Netflix Sans,Helvetica Neue,Segoe UI,Roboto,Ubuntu,sans-serif;
 }

@@ -1,6 +1,6 @@
 import express  from "express";
 import { isAdmin, requireSignIn } from "../middlewares/authMiddleware.js";
-import { createProductController, deleteProductController, getProductController, getSingleProductController, productCountController, productFilterController, productListController, productPhotoController, searchProductController, updateProductController } from "../controller/productController.js";
+import { createProductController, deleteProductController, getProductController, getSingleProductController, productCountController, productFilterController, productListController, productPhotoController, relatedProductontroller, searchProductController, updateProductController } from "../controller/productController.js";
 import ExpressFormidable from "express-formidable";
 
 
@@ -25,5 +25,7 @@ router.get('/product-count',productCountController)
 router.get('/product-list/:page',productListController)
 //search product
 router.get('/search/:keyword',searchProductController)
+//similar route 
+router.get('/related-product/:pid/:cid',relatedProductontroller)
 
 export default router
