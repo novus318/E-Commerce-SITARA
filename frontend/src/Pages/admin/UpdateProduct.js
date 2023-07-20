@@ -103,7 +103,7 @@ const handleDelete =async()=>{
   <div className="m-auto col-7 text-center">
   <h1 className='head-t mt-3 '>Update Product</h1>
     <div>
-    <Select bordered={false} placeholder='Select a category' size='large' className='form-select-sm mb-3'
+    <Select bordered={false} placeholder='Select a category' size='large' className='form-select-sm col-12 mb-3'
     onChange={(value)=>{setCategory(value)}}
     value={category}
     >

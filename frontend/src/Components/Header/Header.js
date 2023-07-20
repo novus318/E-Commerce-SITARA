@@ -57,22 +57,23 @@ return (
       <Search/>
         <div className='ms-auto'>
         <Nav className="ms-2 me-2 ">
-        {auth.user ?<div className='pe-2 me-5'> 
+        <Link className='nav-li mt-2 pt-1 me-2' to='/'>Home</Link>
+        {auth.user ?<div className='mt-2 me-2'> 
            <Dropdown>
-            <Dropdown.Toggle>
-          <MDBIcon className='pt-2 pb-2' icon='user-alt' size='2x' />
+            <Dropdown.Toggle className='a-link'>
+          <MDBIcon  icon='user-alt' />
           </Dropdown.Toggle>
-          <Dropdown.Menu > 
-          <Dropdown.Item className='drop-item' ><Link className='cat' to='/'>Home</Link></Dropdown.Item>
+          <Dropdown.Menu >
           <Dropdown.Item className='drop-item' ><Link className='cat' to={`${auth?.user?.role ===1?'/admin':'/user/profile'}`}>Profile</Link></Dropdown.Item>
           {auth?.user?.role===0&& (<><Dropdown.Item className='drop-item' ><Link className='cat' to='/user/orders'>Orders</Link></Dropdown.Item>
-          <Dropdown.Item className='drop-item' ><Badge size='small' count={cart?.length} color='#656565' showZero>
-          <Link className='cat' to='/user/cart'>Cart '</Link>
-    </Badge></Dropdown.Item></>)}
-          <Dropdown.Item onClick={handleLogout} ><Link to='/login'><MDBIcon icon='sign-out-alt' size='lg'className='logout' /></Link></Dropdown.Item>
+          </>)}
+          <Dropdown.Item className='drop-item'  onClick={handleLogout} ><Link className='cat' to='/login'>Logout<MDBIcon icon='sign-out-alt' size='lg'className='logout' /></Link></Dropdown.Item>
           </Dropdown.Menu>
           </Dropdown></div>:
-          <div className='ps-3 pt-2 mt-1'><Link className='a-link' to='/login'>Login</Link></div>}
+          <div className='ps-3 pt-2 mt-1'><Link className='nav-li' to='/login'>Login</Link></div>}
+          {auth?.user?.role===0&&(<Badge className='mt-2 me-2 ' size='small' count={cart?.length} color='#656565' showZero>
+          <Link className='nav-li' to='/user/cart'><MDBIcon className='pt-2 pb-2' icon='shopping-bag' /></Link>
+    </Badge>)}
           {auth?.user?.role===1 ?'':
           <div className='mb-2'> 
           <Dropdown className='mt-1'><Dropdown.Toggle className='a-link'>Categories</Dropdown.Toggle>

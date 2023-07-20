@@ -17,7 +17,7 @@
 	text-decoration: none;
 	font-family:  Netflix Sans,Helvetica Neue,Segoe UI,Roboto,Ubuntu,sans-serif;
 	font-weight: 600;
-	font-size: 1.6em;
+	font-size: 1.3em;
 	color: #646464;
 
 
@@ -111,4 +111,15 @@ padding: 0.8em;
 	outline: none !important;
 	border: solid 0.1em #646464 !important;
 	box-shadow: none !important;
+}
+.nav-li{
+	text-decoration: none;
+	cursor: pointer;
+	font-family:  Netflix Sans,Helvetica Neue,Segoe UI,Roboto,Ubuntu,sans-serif;
+	font-weight: 600;
+	font-size: 1.3em;
+	color: #646464;
+}
+.nav-li:hover{
+	color: #646464 !important;
 }

@@ -129,13 +129,14 @@ function ProductDetails() {
                          </div>
                        </div>
                      </div>
+                     {auth?.user?.role===0 &&(<>
                      <button className="buy-btn p-1 ps-2 pe-2 me-3"><i className="me-1 fa fa-credit-card-alt fa-lg" /> Buy now </button>
-                     {auth?.user?.role===0 && <button className="cart-btn p-1 ps-2 pe-2 me-3" onClick={()=>{
+                      <button className="cart-btn p-1 ps-2 pe-2 me-3" onClick={()=>{
                       setCart([...cart,product])
                       localStorage.setItem('cart',JSON.stringify([...cart,product]))
                       toast.success('Item added to Cart')
-                     }}><i className="me-1 fa fa-cart-plus fa-lg" /> Add to cart </button>}
-                     <button className="cart-btn p-1 ps-2 pe-2"> <i className="me-1 fa fa-heart fa-lg" /> Save </button>
+                     }}><i className="me-1 fa fa-cart-plus fa-lg" /> Add to cart </button>
+                     <button className="cart-btn p-1 ps-2 pe-2"> <i className="me-1 fa fa-heart fa-lg" /> Save </button></>)}
                    </div>
                  </main>
                </div>

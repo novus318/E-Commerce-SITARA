@@ -3,23 +3,29 @@ import React, { useEffect, useState } from 'react'
 import MenuSidebar from './Sidebar'
 import toast  from 'react-hot-toast'
 import axios from 'axios'
-import { MDBBtn, MDBIcon } from 'mdb-react-ui-kit'
+import { MDBBtn, MDBIcon, MDBInput } from 'mdb-react-ui-kit'
 import CategoryForm from '../../Components/form/CategoryForm'
 import {Modal} from 'antd'
 function CreateCategory() {
   const [categories,setCategories] = useState([])
   const [name, setName] = useState()
+  const [photo, setPhoto] = useState('')
   const [visible, setVisible] = useState(false)
   const [selected, setSelected] = useState(null)
   const [updateName, setUpdateName] = useState('')
+  const [updatePhoto, setUpdatePhoto] = useState('')
   const handleUpdate=async(e)=>{
     e.preventDefault()
     try {
-      const {data} =await axios.put(`/api/v1/category/update-category/${selected._id}`,{name:updateName})
+      const categoryData=new FormData()
+      categoryData.append('name',updateName)
+      updatePhoto && categoryData.append('photo',updatePhoto)
+      const {data} =await axios.put(`/api/v1/category/update-category/${selected._id}`,categoryData)
       if(data?.success){
         toast.success(`${updateName} is updated`)
         setSelected(null)
         setUpdateName('')
+        setUpdatePhoto ('')
         setVisible(false)
         getAllCategory()
       }else{
@@ -48,10 +54,14 @@ function CreateCategory() {
   const handleSubmit=async(e)=>{
     e.preventDefault()
     try {
-      const {data}=await axios.post('/api/v1/category/create-category',{name})
+      const categoryData=new FormData()
+      categoryData.append('name',name)
+      categoryData.append('photo',photo)
+      const {data}=await axios.post('/api/v1/category/create-category',categoryData)
       if(data?.success){
         toast.success(`${name} is created`)
         getAllCategory()
+        window.location.reload()
       }else{
         toast.error(data.message)
       }
@@ -82,7 +92,7 @@ function CreateCategory() {
     <div className="m-auto text-center">
     <h1 className='head-t mt-4'>Manage Category</h1>
     <div>
-      <CategoryForm handleSubmit={handleSubmit} value={name} setValue={setName}/>
+      <CategoryForm handleSubmit={handleSubmit} value={name} setValue={setName} setPhoto={setPhoto} photo={photo}/>
     </div>
     <div>
    <table className="table">
@@ -113,7 +123,33 @@ function CreateCategory() {
 
     </div>
     <Modal onCancel={()=>setVisible(false)} footer={null} visible={visible}>
-      <CategoryForm value={updateName} setValue={setUpdateName} handleSubmit={handleUpdate}/>
+    <form onSubmit={handleUpdate}>
+      <MDBInput wrapperClass='mb-2 mt-5' value={updateName} onChange={(e)=>{setUpdateName(e.target.value)}} placeholder='Enter New Category' type='text' />
+      <div className='mb-3'>
+      <label className='btn btn-outline-secondary col-md-12'>
+        {photo ? photo.name:"Upload photo"}
+    <input 
+    type='file'
+    name='photo'
+    accept='image/*'
+    onChange={(e)=>{setUpdatePhoto(e.target.files[0])}}  hidden />
+    </label>
+    </div>
+    <div className='mb-3'>
+    <div className='mb-3'>
+        {updatePhoto ? (
+          <div>
+            <img src={URL.createObjectURL(updatePhoto)} alt='catagory' height={'100em'} className='img img-responsive' />
+            </div>
+        ):(
+            <div>
+              <img src={`/api/v1/category/category-photo/${selected?._id}`} alt='category' height={'100em'} className='img img-responsive' />
+              </div>
+          )}
+    </div>
+    </div>
+      <MDBBtn className='btn-form' type='submit'><MDBIcon className='form-icon' fas icon='check' size="lg" /></MDBBtn>
+      </form>
     </Modal>
     </div>
     </div>
