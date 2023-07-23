@@ -53,7 +53,7 @@ function AllProducts() {
            <div key={p._id} className="product-card mb-3">
           <Link to={`/product/${p.slug}`}>
            <div className="product-tumb">
-               <img className='p-img' src={`http://localhost:8080/api/v1/product/product-photo/${p._id}`} alt={p.name}/>
+               <img className='p-img' src={`/api/v1/product/product-photo1/${p._id}`} alt={p.name}/>
            </div>
            <div className="product-details">
                <div className='p-head'>{p.name}</div>

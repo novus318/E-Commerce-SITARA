@@ -9,7 +9,6 @@ const userSchema= new mongoose.Schema({
     email:{
         type:String,
         require:true,
-        unique:true
     },
     password:{
         type:String,
@@ -19,7 +18,19 @@ const userSchema= new mongoose.Schema({
         type:String,
         require:true,
     },
-    question:{
+    city:{
+        type:String,
+        require:true,
+    },
+    zip:{
+        type:String,
+        require:true,
+    },
+    landmark:{
+        type:String,
+        require:true,
+    },
+    state:{
         type:String,
         require:true,
     },

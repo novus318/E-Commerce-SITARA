@@ -15,7 +15,10 @@ function CreateProduct() {
   const [category, setCategory] = useState('')
   const [quantity, setQuantity] = useState('')
   const [shipping, setShipping] = useState('')
-  const [photo, setPhoto] = useState('')
+  const [photo1, setPhoto1] = useState('')
+  const [photo2, setPhoto2] = useState('')
+  const [photo3, setPhoto3] = useState('')
+  const [photo4, setPhoto4] = useState('')
   const navigate=useNavigate()
   //Create product
   const handleCreate=async(e)=>{
@@ -27,7 +30,11 @@ function CreateProduct() {
       productData.append('price',price)
       productData.append('category',category)
       productData.append('quantity',quantity)
-      productData.append('photo',photo)
+      productData.append('image1',photo1)
+      productData.append('image2',photo2)
+      productData.append('image3',photo3)
+      productData.append('image4',photo4)
+      productData.append('shipping',shipping)
       const {data}=await axios.post('/api/v1/product/create-product',productData)
       if(data?.success ===false){
         toast.error(data?.message)
@@ -72,19 +79,58 @@ useEffect(() => {
       ))}
     </Select>
     <div className='mb-3'>
-      <label className='btn btn-outline-secondary col-md-12'>
-        {photo ? photo.name:"Upload photo"}
+      <label className='btn btn-outline-secondary col-md-3'>
+        {photo1 ? photo1.name:"Upload photo 1"}
     <input 
     type='file'
     name='photo'
     accept='image/*'
-    onChange={(e)=>{setPhoto(e.target.files[0])}}  hidden />
+    onChange={(e)=>{setPhoto1(e.target.files[0])}}  hidden />
+    </label>
+    <label className='btn btn-outline-secondary col-md-3'>
+        {photo2 ? photo2.name:"Upload photo 2"}
+    <input 
+    type='file'
+    name='photo'
+    accept='image/*'
+    onChange={(e)=>{setPhoto2(e.target.files[0])}}  hidden />
+    </label>
+    <label className='btn btn-outline-secondary col-md-3'>
+        {photo3 ? photo3.name:"Upload photo 3"}
+    <input 
+    type='file'
+    name='photo'
+    accept='image/*'
+    onChange={(e)=>{setPhoto3(e.target.files[0])}}  hidden />
+    </label>
+    <label className='btn btn-outline-secondary col-md-3'>
+        {photo4 ? photo4.name:"Upload photo 4"}
+    <input 
+    type='file'
+    name='photo'
+    accept='image/*'
+    onChange={(e)=>{setPhoto4(e.target.files[0])}}  hidden />
     </label>
     </div>
-    <div className='mb-3'>
-        {photo && (
-          <div>
-            <img src={URL.createObjectURL(photo)} alt="product photo" height={'100em'} className='img img-responsive' />
+    <div className=' row mb-3'>
+        {photo1 && (
+          <div className='col-3'>
+            <img src={URL.createObjectURL(photo1)} alt="" height={'100em'} className='img img-responsive' />
+            </div>
+        )}
+        {photo2 && (
+          <div className='col-3'>
+            <img src={URL.createObjectURL(photo2)} alt="" height={'100em'} className='img img-responsive' />
+            </div>
+        )}
+        {photo3 && (
+          <div className='col-3'>
+            <img src={URL.createObjectURL(photo3)} alt="" height={'100em'} className='img img-responsive' />
+            </div>
+        )}
+        {photo4 && (
+          <div className='col-3'>
+            <img src={URL.createObjectURL(photo4)} alt="" height={'100em'} className='img img-responsive' />
             </div>
         )}
     </div>
@@ -100,8 +146,8 @@ useEffect(() => {
       <Option value='1'>Yes</Option>
     </Select>
     </div>
-    <div>
-      <MDBBtn className='form-btn' onClick={handleCreate}>Create Product</MDBBtn>
+    <div className='mb-4'>
+      <MDBBtn className='form-btn col-12' onClick={handleCreate}>Create Product</MDBBtn>
     </div>
   </div>
   </div>

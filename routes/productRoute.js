@@ -1,5 +1,5 @@
 import express  from "express";
-import { createProductController, deleteProductController, getProductController, getSingleProductController, productCountController, productFilterController, productListController, productPhotoController, relatedProductontroller, searchProductController, updateProductController } from "../controller/productController.js";
+import { createProductController, deleteProductController, getProductController, getSingleProductController, productCountController, productFilterController, productListController, productPhoto1Controller, productPhoto2Controller, productPhoto3Controller, productPhoto4Controller, relatedProductontroller, searchProductController, updateProductController } from "../controller/productController.js";
 import ExpressFormidable from "express-formidable";
 
 
@@ -13,7 +13,10 @@ router.get('/get-product',getProductController)
 //single product
 router.get('/get-product/:slug',getSingleProductController)
 //get-photo
-router.get('/product-photo/:pid',productPhotoController)
+router.get('/product-photo1/:pid',productPhoto1Controller)
+router.get('/product-photo2/:pid',productPhoto2Controller)
+router.get('/product-photo3/:pid',productPhoto3Controller)
+router.get('/product-photo4/:pid',productPhoto4Controller)
 //delete product
 router.delete('/delete-product/:pid',deleteProductController)
 //filter product

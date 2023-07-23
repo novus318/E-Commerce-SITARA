@@ -17,6 +17,7 @@ function ProductDetails() {
     const [product, setProduct] = useState({})
     const [cart,setCart] =useCart()
     const [auth]=useAuth()
+    const [selectImage, setSelectImage] = useState('')
     const [similarProducts, setSimilarProducts] = useState([])
     const responsive = {
       superLargeDesktop: {
@@ -72,23 +73,17 @@ function ProductDetails() {
              <div className="container">
                <div className="row gx-5">
                  <aside className="col-lg-6">
-                         <div className='mb-4'>      
-                       <img style={{maxWidth: '100%', maxHeight: '100h', margin: 'auto'}} className="rounded-4 fit img img-responsive" alt='pic' src={`/api/v1/product/product-photo/${product?._id}`} />
+                         <div className='mb-4 d-flex justify-content-center'>      
+                       <img height={400} style={{maxWidth: '100%', maxHeight: '100h', margin: 'auto'}} className="rounded-4 fit img img-responsive" alt='pic' src={selectImage? selectImage:`/api/v1/product/product-photo1/${product._id}`} />
                        </div>
                    <div className="d-flex justify-content-center mb-3">
+                   <img width={60} height={70} onClick={()=>{setSelectImage(`/api/v1/product/product-photo1/${product._id}`)}} className="rounded-1 me-3" alt='pic' src={`/api/v1/product/product-photo1/${product._id}`} />
                      
-                       <img width={60} height={60} className="rounded-2" alt='pic' src={`/api/v1/product/product-photo/${product._id}`} />
+                       <img width={60} height={70} className="rounded-1 me-3" onClick={()=>{setSelectImage(`/api/v1/product/product-photo2/${product._id}`)}} alt='pic' src={`/api/v1/product/product-photo2/${product._id}`} />
          
-                       <img width={60} height={60} className="rounded-2" alt='pic' src={`/api/v1/product/product-photo/${product._id}`} />
+                       <img width={60} height={70} className="rounded-1 me-3" onClick={()=>{setSelectImage(`/api/v1/product/product-photo3/${product._id}`)}} alt='pic' src={`/api/v1/product/product-photo3/${product._id}`} />                    
                      
-                     
-                       <img width={60} height={60} className="rounded-2" alt='pic' src={`/api/v1/product/product-photo/${product._id}`} />
-                     
-                     
-                       <img width={60} height={60} className="rounded-2" alt='pic' src={`/api/v1/product/product-photo/${product._id}`} />
-                     
-                     
-                       <img width={60} height={60} className="rounded-2" alt='pic' src={`/api/v1/product/product-photo/${product._id}`} />
+                       <img width={60} height={70} className="rounded-1 me-3" onClick={()=>{setSelectImage(`/api/v1/product/product-photo4/${product._id}`)}} alt='pic' src={`/api/v1/product/product-photo4/${product._id}`} />
                      
                    </div>
                  </aside>
@@ -153,7 +148,7 @@ function ProductDetails() {
 		   <div className="m-auto product-card mb-3">
 		  <Link to={`/product/${p.slug}`} key={p._id}>
 		   <div className="product-tumb">
-			   <img className='p-img' src={`/api/v1/product/product-photo/${p._id}`} alt={p.name}/>
+			   <img className='p-img' src={`/api/v1/product/product-photo1/${p._id}`} alt={p.name}/>
 		   </div>
 		   <div className="product-details">
 			   <div className='p-head'>{p.name}</div>

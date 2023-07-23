@@ -16,7 +16,10 @@ function UpdateProduct() {
   const [category, setCategory] = useState('')
   const [quantity, setQuantity] = useState('')
   const [shipping, setShipping] = useState('')
-  const [photo, setPhoto] = useState('')
+  const [photo1, setPhoto1] = useState('')
+  const [photo2, setPhoto2] = useState('')
+  const [photo3, setPhoto3] = useState('')
+  const [photo4, setPhoto4] = useState('')
   const navigate=useNavigate()
   const params=useParams()
   //Create product
@@ -29,7 +32,11 @@ function UpdateProduct() {
       productData.append('price',price)
       productData.append('category',category)
       productData.append('quantity',quantity)
-      photo && productData.append('photo',photo)
+      photo1 && productData.append('image1',photo1)
+      photo2 && productData.append('image2',photo2)
+      photo3 && productData.append('image3',photo3)
+      photo4 && productData.append('image4',photo4)
+      productData.append('shipping',shipping)
       const {data}=await axios.put(`/api/v1/product/update-product/${id}`,productData)
       if(data?.success ===false){
         toast.error(data?.message)
@@ -112,23 +119,74 @@ const handleDelete =async()=>{
       ))}
     </Select>
     <div className='mb-3'>
-      <label className='btn btn-outline-secondary col-md-12'>
-        {photo ? photo.name:"Upload photo"}
+      <label className='btn btn-outline-secondary col-md-3'>
+        {photo1 ? photo1.name:"Upload photo 1"}
     <input 
     type='file'
     name='photo'
     accept='image/*'
-    onChange={(e)=>{setPhoto(e.target.files[0])}}  hidden />
+    onChange={(e)=>{setPhoto1(e.target.files[0])}}  hidden />
+    </label>
+    <label className='btn btn-outline-secondary col-md-3'>
+        {photo2 ? photo2.name:"Upload photo 2"}
+    <input 
+    type='file'
+    name='photo'
+    accept='image/*'
+    onChange={(e)=>{setPhoto2(e.target.files[0])}}  hidden />
+    </label>
+    <label className='btn btn-outline-secondary col-md-3'>
+        {photo3 ? photo3.name:"Upload photo 3"}
+    <input 
+    type='file'
+    name='photo'
+    accept='image/*'
+    onChange={(e)=>{setPhoto3(e.target.files[0])}}  hidden />
+    </label>
+    <label className='btn btn-outline-secondary col-md-3'>
+        {photo4 ? photo4.name:"Upload photo 4"}
+    <input 
+    type='file'
+    name='photo'
+    accept='image/*'
+    onChange={(e)=>{setPhoto4(e.target.files[0])}}  hidden />
     </label>
     </div>
-    <div className='mb-3'>
-        {photo ? (
-          <div>
-            <img src={URL.createObjectURL(photo)} alt={name} height={'100em'} className='img img-responsive' />
+    <div className='row mb-3'>
+        {photo1 ? (
+          <div className='col-3'>
+            <img src={URL.createObjectURL(photo1)} alt={name} height={'100em'} className='img img-responsive' />
             </div>
         ):(
-            <div>
-              <img src={`http://localhost:8080/api/v1/product/product-photo/${id}`} alt={name} height={'100em'} className='img img-responsive' />
+            <div className='col-3'>
+              <img src={`/api/v1/product/product-photo1/${id}`} alt={name} height={'100em'} className='img img-responsive' />
+              </div>
+          )}
+          {photo2 ? (
+          <div className='col-3'>
+            <img src={URL.createObjectURL(photo2)} alt={name} height={'100em'} className='img img-responsive' />
+            </div>
+        ):(
+            <div className='col-3'>
+              <img src={`/api/v1/product/product-photo2/${id}`} alt={name} height={'100em'} className='img img-responsive' />
+              </div>
+          )}
+          {photo3 ? (
+          <div className='col-3'>
+            <img src={URL.createObjectURL(photo3)} alt={name} height={'100em'} className='img img-responsive' />
+            </div>
+        ):(
+            <div className='col-3'>
+              <img src={`/api/v1/product/product-photo3/${id}`} alt={name} height={'100em'} className='img img-responsive' />
+              </div>
+          )}
+          {photo4 ? (
+          <div className='col-3'>
+            <img src={URL.createObjectURL(photo4)} alt={name} height={'100em'} className='img img-responsive' />
+            </div>
+        ):(
+            <div className='col-3'>
+              <img src={`/api/v1/product/product-photo4/${id}`} alt={name} height={'100em'} className='img img-responsive' />
               </div>
           )}
     </div>

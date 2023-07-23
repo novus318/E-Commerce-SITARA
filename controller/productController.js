@@ -4,7 +4,7 @@ import fs from 'fs'
 export const createProductController=async(req,res)=>{
     try {
         const {name,slug,description,price,category,quantity,shipping}=req.fields
-        const {photo} =req.files
+        const {image1,image2,image3,image4} =req.files
         //validation
         switch(true){
             case !name:
@@ -16,15 +16,25 @@ export const createProductController=async(req,res)=>{
             case !category:
                 res.status(500).send({error:'Category is required'})
             case !quantity:
-                res.status(500).send({error:'Quantity is required'})   
-            case !photo && photo.size > 4000000:
-                    res.status(500).send({error:'Photo is required and should be less than 4mb'})
+                res.status(500).send({error:'Quantity is required'})
         }
         
         const products=new productModel({...req.fields,slug:slugify(name)})
-        if(photo){
-            products.photo.data =fs.readFileSync(photo.path)
-            products.photo.contentType =photo.type
+        if(image1){
+            products.photo.image1.data =fs.readFileSync(image1.path)
+            products.photo.image1.contentType =image1.type
+        }
+        if(image2){
+            products.photo.image2.data =fs.readFileSync(image2.path)
+            products.photo.image2.contentType =image2.type
+        }
+        if(image3){
+            products.photo.image3.data =fs.readFileSync(image3.path)
+            products.photo.image3.contentType =image3.type
+        }
+        if(image4){
+            products.photo.image4.data =fs.readFileSync(image4.path)
+            products.photo.image4.contentType =image4.type
         }
         await products.save()
         res.status(201).send({
@@ -78,12 +88,60 @@ export const getSingleProductController=async(req,res)=>{
         })
     }
 }
-export const productPhotoController=async(req,res)=>{
+export const productPhoto1Controller=async(req,res)=>{
     try {
         const product=await productModel.findById(req.params.pid).select('photo')
-        if(product.photo.data){
-            res.set('Content-type',product.photo.contentType)
-            return res.status(200).send(product.photo.data)
+        if(product.photo.image1.data){
+            res.set('Content-type',product.photo.image1.contentType)
+            return res.status(200).send(product.photo.image1.data)
+        }
+    } catch (error) {
+        console.log(error)
+        res.status(500).send({
+            success:false,
+            message:'error while getting photo',
+            error
+        })
+    }
+}
+export const productPhoto2Controller=async(req,res)=>{
+    try {
+        const product=await productModel.findById(req.params.pid).select('photo')
+        if(product.photo.image2.data){
+            res.set('Content-type',product.photo.image2.contentType)
+            return res.status(200).send(product.photo.image2.data)
+        }
+    } catch (error) {
+        console.log(error)
+        res.status(500).send({
+            success:false,
+            message:'error while getting photo',
+            error
+        })
+    }
+}
+export const productPhoto3Controller=async(req,res)=>{
+    try {
+        const product=await productModel.findById(req.params.pid).select('photo')
+        if(product.photo.image3.data){
+            res.set('Content-type',product.photo.image3.contentType)
+            return res.status(200).send(product.photo.image3.data)
+        }
+    } catch (error) {
+        console.log(error)
+        res.status(500).send({
+            success:false,
+            message:'error while getting photo',
+            error
+        })
+    }
+}
+export const productPhoto4Controller=async(req,res)=>{
+    try {
+        const product=await productModel.findById(req.params.pid).select('photo')
+        if(product.photo.image4.data){
+            res.set('Content-type',product.photo.image4.contentType)
+            return res.status(200).send(product.photo.image4.data)
         }
     } catch (error) {
         console.log(error)
@@ -97,7 +155,7 @@ export const productPhotoController=async(req,res)=>{
 export const updateProductController=async(req,res)=>{
     try {
         const {name,slug,description,price,category,quantity,shipping}=req.fields
-        const {photo} =req.files
+        const {image1,image2,image3,image4} =req.files
         //validation
         switch(true){
             case !name:
@@ -110,16 +168,27 @@ export const updateProductController=async(req,res)=>{
                 res.status(500).send({error:'Category is required'})
             case !quantity:
                 res.status(500).send({error:'Quantity is required'})   
-            case !photo && photo > 4000000:
-                    res.status(500).send({error:'Photo is required and should be less than 4mb'})
+            
         }
         
         const products=await productModel.findByIdAndUpdate(req.params.pid,{
             ...req.fields,slug:slugify(name)
         },{new:true})
-        if(photo){
-            products.photo.data =fs.readFileSync(photo.path)
-            products.photo.contentType =photo.type
+        if(image1){
+            products.photo.image1.data =fs.readFileSync(image1.path)
+            products.photo.image1.contentType =image1.type
+        }
+        if(image2){
+            products.photo.image2.data =fs.readFileSync(image2.path)
+            products.photo.image2.contentType =image2.type
+        }
+        if(image3){
+            products.photo.image3.data =fs.readFileSync(image3.path)
+            products.photo.image3.contentType =image3.type
+        }
+        if(image4){
+            products.photo.image4.data =fs.readFileSync(image4.path)
+            products.photo.image4.contentType =image4.type
         }
         await products.save()
         res.status(201).send({

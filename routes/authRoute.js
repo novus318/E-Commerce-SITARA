@@ -1,5 +1,5 @@
 import express  from "express";
-import {signupController,loginController,testController, googleController,forgotPasswordController} from '../controller/authController.js'
+import {signupController,loginController,testController, googleController,forgotPasswordController, updateProfileController} from '../controller/authController.js'
 import { isAdmin, requireSignIn } from "../middlewares/authMiddleware.js";
 //router object
 const router=express.Router()
@@ -23,6 +23,8 @@ router.get('/admin-auth',requireSignIn,isAdmin,(req,res)=>{
         ok:true
     })
 })
+//apdate profile
+router.put('/profile/:pid',updateProfileController)
 //test routes
 router.get('/test',requireSignIn,isAdmin,testController)
 export default router

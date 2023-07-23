@@ -12,7 +12,7 @@ function MenuSidebar() {
  <MDBBtn className='col-12 s-btn' onClick={() => setCollapsed(!collapsed)}>
            {collapsed ?'|>':'<|'}
          </MDBBtn>
-         <Link to='/admin'><MenuItem icon={<MDBIcon className='fas' fas icon='home' size="lg" />}>Home</MenuItem></Link>
+         <Link to='/'><MenuItem icon={<MDBIcon className='fas' fas icon='home' size="lg" />}>Home</MenuItem></Link>
          <Link to='/admin/banner'><MenuItem icon={<MDBIcon className='fas' fas icon='chalkboard' size="lg" />}>Banner</MenuItem></Link>
          <Link to='/admin/create-category'><MenuItem icon={<MDBIcon className='fas' fas icon='th-large' size="lg" />}>Create Category</MenuItem></Link>
          <Link to='/admin/create-product'><MenuItem icon={<MDBIcon className='fas' fas icon='box-open' size="lg" />}>Create Product</MenuItem></Link>

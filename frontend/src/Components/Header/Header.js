@@ -60,7 +60,7 @@ return (
         <Link className='nav-li mt-2 pt-1 me-2' to='/'>Home</Link>
         {auth.user ?<div className='mt-2 me-2'> 
            <Dropdown>
-            <Dropdown.Toggle className='a-link'>
+            <Dropdown.Toggle className={auth?.user?.role ===1?'a-link ms-5 pe-5':'a-link'}>
           <MDBIcon  icon='user-alt' />
           </Dropdown.Toggle>
           <Dropdown.Menu >

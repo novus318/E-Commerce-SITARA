@@ -8,7 +8,6 @@ import Layout from './Components/Layout';
 import PrivateRoute from './Components/routes/PrivateRoute';
 import ForgotPassword from './Pages/ForgotPassword';
 import AdminRoute from './Components/routes/AdminRoute';
-import AdminDashboard from './Pages/admin/AdminDashboard';
 import CreateCategory from './Pages/admin/CreateCategory';
 import CreateProduct from './Pages/admin/CreateProduct';
 import Users from './Pages/admin/Users';
@@ -40,7 +39,7 @@ function App() {
         <Route exact path='/user/cart' element={ <Cart/>}/>
         </Route>
         <Route exact path='/admin' element={ <AdminRoute/>}>
-        <Route exact path='/admin' element={ <AdminDashboard/>}/>
+        <Route exact path='/admin' element={ <Orders/>}/>
         <Route exact path='/admin/banner' element={ <UpdateBanner/>}/>
         <Route exact path='/admin/create-category' element={ <CreateCategory/>}/>
         <Route exact path='/admin/create-product' element={ <CreateProduct/>}/>

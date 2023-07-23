@@ -1,14 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import "./AllProducts.css";
 import Header from "../Components/Header/Header";
 import { useCart } from "../store/CartContext";
-import { useAuth } from "../store/authContext";
 import { useNavigate } from "react-router-dom";
-import { MDBIcon } from "mdb-react-ui-kit";
+import { MDBIcon, MDBTextArea } from "mdb-react-ui-kit";
+import { useAuth } from "../store/authContext";
 
 function Cart() {
-  const [cart, setCart] = useCart();
   const [auth, setAuth] = useAuth();
+  const [cart, setCart] = useCart();
+  const [address, setAddress] = useState("")
   const navigate = useNavigate();
   //total
   const totalPrice = () => {
@@ -54,7 +55,7 @@ function Cart() {
                     className="col-4 col-md-2  col-lg-2 col-xl-2 mb-2"
                   >
                     <img
-                      src={`/api/v1/product/product-photo/${p?._id}`}
+                      src={`/api/v1/product/product-photo1/${p?._id}`}
                       className="img-fluid rounded-3"
                       alt="Cotton T-shirt"
                     />
@@ -102,6 +103,14 @@ function Cart() {
               <h5 className="text-uppercase">Total price</h5>
               <h5>{totalPrice()}</h5>
             </div>
+            <hr className="my-4" />
+            <div className="d-flex justify-content-between mb-2">
+              <h5 className="head-t">Shipping address</h5>
+            </div>
+            {auth.user.address ?(<MDBTextArea placeholder="Address" rows={3} className="mb-4" 
+            value={auth?.user?.address} disabled/>):(<>
+            <MDBTextArea placeholder="Address" rows={3} className="mb-4" 
+            value={address} onChange={(e)=>setAddress(e.target.value)}/></>)}
             <button className="cart-btn p-1 pe-3 ps-3">Check Out</button>
           </div>
         </div>
