@@ -64,3 +64,7 @@
     color: #656565;
     font-family: Netflix Sans,Helvetica Neue,Segoe UI,Roboto,Ubuntu,sans-serif;
 }
+.stock-out{
+    color: #eb3629;
+    font-weight: 700;
+}

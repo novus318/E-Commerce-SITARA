@@ -15,7 +15,7 @@ function Header() {
  
   
 const[auth,setAuth]=useAuth()
-const[cart]=useCart()
+const{cart}=useCart()
 const handleLogout=()=>{
 setAuth({
   ...auth,

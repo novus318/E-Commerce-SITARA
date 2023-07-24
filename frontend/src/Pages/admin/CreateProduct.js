@@ -4,7 +4,7 @@ import MenuSidebar from './Sidebar'
 import axios from 'axios'
 import toast  from 'react-hot-toast'
 import {Select} from 'antd'
-import { MDBBtn, MDBInput,MDBTextArea } from 'mdb-react-ui-kit'
+import { MDBBtn, MDBCheckbox, MDBInput,MDBTextArea } from 'mdb-react-ui-kit'
 import { useNavigate } from 'react-router-dom'
 const {Option}=Select
 function CreateProduct() {
@@ -12,6 +12,7 @@ function CreateProduct() {
   const [name, setName] = useState('')
   const [description, setDescription] = useState('')
   const [price, setPrice] = useState('')
+  const [sizes, setSizes] = useState([])
   const [category, setCategory] = useState('')
   const [quantity, setQuantity] = useState('')
   const [shipping, setShipping] = useState('')
@@ -28,6 +29,7 @@ function CreateProduct() {
       productData.append('name',name)
       productData.append('description',description)
       productData.append('price',price)
+      productData.append('sizes',JSON.stringify(sizes))
       productData.append('category',category)
       productData.append('quantity',quantity)
       productData.append('image1',photo1)
@@ -45,6 +47,14 @@ function CreateProduct() {
     } catch (error) {
       console.log(error)
       toast.error('Something went wrong')
+    }
+  }
+  //size change
+  const handleSizeChange = (size) => {
+    if (sizes.includes(size)) {
+      setSizes(sizes.filter((s) => s !== size)); // Unchecking a size, remove it from the array
+    } else {
+      setSizes([...sizes, size]); // Checking a size, add it to the array
     }
   }
 //get all category
@@ -133,6 +143,14 @@ useEffect(() => {
             <img src={URL.createObjectURL(photo4)} alt="" height={'100em'} className='img img-responsive' />
             </div>
         )}
+    </div>
+    <div className='mb-3'>
+      <h5 className='head-t'>Size</h5>
+    <MDBCheckbox name='inlineCheck' checked={sizes.includes('S')} onChange={() => handleSizeChange('S')} label='S' inline/>
+    <MDBCheckbox name='inlineCheck' checked={sizes.includes('M')} onChange={() => handleSizeChange('M')} label='M' inline/>
+    <MDBCheckbox name='inlineCheck' checked={sizes.includes('L')} onChange={() => handleSizeChange('L')} label='L' inline/>
+    <MDBCheckbox name='inlineCheck' checked={sizes.includes('XL')} onChange={() => handleSizeChange('XL')}  label='XL' inline/>
+    <MDBCheckbox name='inlineCheck' checked={sizes.includes('XXL')} onChange={() => handleSizeChange('XXL')}   label='XXL' inline/>
     </div>
     <div className="mb-3">
     <MDBInput wrapperClass='mb-2' value={name} onChange={(e)=>{setName(e.target.value)}} placeholder='Enter a Name' type='text' />

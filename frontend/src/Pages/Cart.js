@@ -7,20 +7,19 @@ import { MDBIcon, MDBTextArea } from "mdb-react-ui-kit";
 import { useAuth } from "../store/authContext";
 
 function Cart() {
-  const [auth, setAuth] = useAuth();
-  const [cart, setCart] = useCart();
+  const [auth, ] = useAuth();
+  const {cart,setCart} = useCart();
   const [address, setAddress] = useState("")
   const navigate = useNavigate();
   //total
   const totalPrice = () => {
-    try {
-      let total = 0;
-      cart.map((i) => (total = total + i.price));
-      return total;
-    } catch (error) {
-      console.log(error);
-    }
-  };
+    const totalPrice = cart.reduce((total, item) => total + item.price * item.count, 0);
+    return totalPrice;
+  }
+  //total items
+  const getTotalItemCount = () => {
+    return cart.reduce((total, item) => total + item.count, 0);
+  }
   //delete
   const removeCartItem = (pid) => {
     try {
@@ -45,7 +44,13 @@ function Cart() {
               <h6 className="mb-0 text-muted">{cart?.length} items</h6>
             </div>
             <hr />
-            {cart?.map((p) => (
+            {cart.length ===0 ? (
+              <>
+              <h2 className="mt-5 pt-5 head-t upper text-center">cart is empty !!!</h2>
+              </>
+            ):(
+              <>
+              {cart?.map((p) => (
               <>
                 <div className="row mb-4 d-flex justify-content-between align-items-center">
                   <div
@@ -64,18 +69,18 @@ function Cart() {
                     onClick={() => {
                       navigate(`/product/${p.slug}`);
                     }}
-                    className="col-4 col-md-3 col-lg-3 col-xl-3"
+                    className="col-7 col-md-3 col-lg-3 col-xl-3"
                   >
                     <h5 className="colr">{p.name}</h5>
-                    <h6 className="text-black">
-                      {p.description.substring(0, 15)}...
-                    </h6>
                   </div>
-                  <div className="col-3 col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+                  <div className="col-5 col-md-3 col-lg-2 col-xl-2 offset-lg-1">
                     <h6 className="pric">Price : ₹{p.price}</h6>
                   </div>
+                  <div className="col-5 col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+                    <h6 className="pric">Quntity : {p.count}<br/><br/>size: {p.size}</h6>
+                  </div>
                   <div
-                    className=" col-1 col-md-1 col-lg-1 col-xl-1 text-end"
+                    className=" col-2 col-md-1 col-lg-1 col-xl-1 text-end"
                     onClick={() => removeCartItem(p._id)}
                   >
                     <MDBIcon
@@ -87,7 +92,8 @@ function Cart() {
                 </div>
                 <hr className="my-4" />
               </>
-            ))}
+            ))}</>
+            )}
           </div>
         </div>
         <div className="col-lg-4 bg-grey">
@@ -95,13 +101,13 @@ function Cart() {
             <h3 className="mb-1 mt-5 head-t">Summary</h3>
             <hr className="my-4" />
             <div className="d-flex justify-content-between mb-4">
-              <h5 className="text-uppercase">items {cart?.length}</h5>
-              <h5>{totalPrice()}</h5>
+              <h5 className="text-uppercase">items : {getTotalItemCount()}</h5>
+              <h5>₹ {totalPrice()}</h5>
             </div>
             <hr className="my-4" />
             <div className="d-flex justify-content-between mb-5">
-              <h5 className="text-uppercase">Total price</h5>
-              <h5>{totalPrice()}</h5>
+              <h5 className="text-uppercase">Total price :</h5>
+              <h5>₹ {totalPrice()}</h5>
             </div>
             <hr className="my-4" />
             <div className="d-flex justify-content-between mb-2">

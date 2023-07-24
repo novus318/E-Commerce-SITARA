@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 
+
 const productSchema =new mongoose.Schema({
     name:{
         type:String,
@@ -17,6 +18,12 @@ const productSchema =new mongoose.Schema({
         type:String,
         require:true
     },
+    sizes:[
+        {
+            type:String,
+            enum:["S","M","L","XL","XXL"]
+        }
+    ],
     category:{
         type:mongoose.ObjectId,
         ref:'category',

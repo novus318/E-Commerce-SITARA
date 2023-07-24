@@ -3,7 +3,7 @@ import productModel from '../models/productModel.js'
 import fs from 'fs'
 export const createProductController=async(req,res)=>{
     try {
-        const {name,slug,description,price,category,quantity,shipping}=req.fields
+        const {name,slug,description,price,sizes,category,quantity,shipping}=req.fields
         const {image1,image2,image3,image4} =req.files
         //validation
         switch(true){
@@ -20,6 +20,9 @@ export const createProductController=async(req,res)=>{
         }
         
         const products=new productModel({...req.fields,slug:slugify(name)})
+        if(sizes){
+            products.sizes =JSON.parse(sizes)
+        }
         if(image1){
             products.photo.image1.data =fs.readFileSync(image1.path)
             products.photo.image1.contentType =image1.type
@@ -154,7 +157,7 @@ export const productPhoto4Controller=async(req,res)=>{
 }
 export const updateProductController=async(req,res)=>{
     try {
-        const {name,slug,description,price,category,quantity,shipping}=req.fields
+        const {name,slug,description,price,sizes,category,quantity,shipping}=req.fields
         const {image1,image2,image3,image4} =req.files
         //validation
         switch(true){
@@ -174,6 +177,9 @@ export const updateProductController=async(req,res)=>{
         const products=await productModel.findByIdAndUpdate(req.params.pid,{
             ...req.fields,slug:slugify(name)
         },{new:true})
+         if(sizes){
+            products.sizes =JSON.parse(sizes)
+        }
         if(image1){
             products.photo.image1.data =fs.readFileSync(image1.path)
             products.photo.image1.contentType =image1.type
