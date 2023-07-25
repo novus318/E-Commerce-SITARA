@@ -3,12 +3,13 @@ import React, { useEffect, useState } from "react";
 import MenuSidebar from "./Sidebar";
 import toast from "react-hot-toast";
 import axios from "axios";
-
+import { ThreeCircles } from "react-loader-spinner";
 
 function UpdateBanner() {
   const [banner, setBanner] = useState("");
   const [banners, setBanners] = useState([]);
   const [id, setId] = useState("");
+  const [loading, setLoading] = useState(true);
   const handleUpdate = async (e) => {
     e.preventDefault();
     try {
@@ -36,6 +37,7 @@ function UpdateBanner() {
       const { data } = await axios.get("/api/v1/banner/get-banners");
       if (data?.success) {
         setBanners(data?.banners);
+        setLoading(false)
       }
     } catch (error) {
       console.log(error);
@@ -46,7 +48,19 @@ function UpdateBanner() {
     getAllBanners();
   }, []);
   return (
-    <>
+   <>
+   {loading ?(<ThreeCircles
+          height="100"
+          width="100"
+          color="#656565"
+          wrapperStyle={{}}
+          wrapperClass="justify-content-center align-items-center h-100"
+          visible={true}
+          ariaLabel="three-circles-rotating"
+          outerCircleColor=""
+          innerCircleColor=""
+          middleCircleColor=""
+        />):( <>
       <div className="d-flex">
         <MenuSidebar />
         <div className="m-auto text-center mt-4 mb-4 col-7">
@@ -92,7 +106,7 @@ function UpdateBanner() {
           ))}
         </div>
       </div>
-    </>
+    </>)}</>
   );
 }
 

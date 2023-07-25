@@ -6,8 +6,10 @@ import axios from 'axios'
 import { MDBBtn, MDBIcon, MDBInput } from 'mdb-react-ui-kit'
 import CategoryForm from '../../Components/form/CategoryForm'
 import {Modal} from 'antd'
+import { ThreeCircles } from "react-loader-spinner";
 function CreateCategory() {
   const [categories,setCategories] = useState([])
+  const [loading, setLoading] = useState(true);
   const [name, setName] = useState()
   const [photo, setPhoto] = useState('')
   const [visible, setVisible] = useState(false)
@@ -39,10 +41,12 @@ function CreateCategory() {
 
   const handleDelete=async(id)=>{
     try {
+      setLoading(true)
       const {data} =await axios.delete(`/api/v1/category/delete-category/${id}`)
       if(data?.success){
         toast.success('Category is deleted')
         getAllCategory()
+        setLoading(false)
       }else{
         toast.error(data.message)
       }
@@ -79,6 +83,7 @@ function CreateCategory() {
       const {data}=await axios.get('/api/v1/category/get-category')
       if(data?.success){
         setCategories(data?.category)
+        setLoading(false)
       }
     } catch (error) {
       console.log(error)
@@ -86,7 +91,19 @@ function CreateCategory() {
     }
   }
   return (
-    <>
+   <>
+   {loading ? (  <ThreeCircles
+          height="100"
+          width="100"
+          color="#656565"
+          wrapperStyle={{}}
+          wrapperClass="justify-content-center align-items-center h-100"
+          visible={true}
+          ariaLabel="three-circles-rotating"
+          outerCircleColor=""
+          innerCircleColor=""
+          middleCircleColor=""
+        />):( <>
       <div className="d-flex">
         <MenuSidebar/>
     <div className="m-auto text-center">
@@ -153,7 +170,7 @@ function CreateCategory() {
     </Modal>
     </div>
     </div>
-    </>
+    </>)}</>
   )
 }
 

@@ -13,6 +13,7 @@ function Home(props) {
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [banners, setBanners] = useState([]);
+  const [loading, setLoading] = useState(true);
   //get all category
 
   const getAllCategory = async () => {
@@ -43,7 +44,8 @@ function Home(props) {
     try {
       const { data } = await axios.get("/api/v1/banner/get-banners");
       if (data?.success) {
-        setBanners(data?.banners);
+        setBanners(data?.banners)
+        setLoading(false);
       }
     } catch (error) {
       console.log(error);
@@ -58,7 +60,7 @@ function Home(props) {
   }, []);
   return (
     <div className="home">
-      {banners ? (
+      {!loading ? (
         <>
           <Header />
           <Banner banners={banners} />

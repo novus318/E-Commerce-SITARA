@@ -21,8 +21,9 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import toast from 'react-hot-toast'
 import { useAuth } from '../../store/authContext';
-
+import { ThreeCircles } from "react-loader-spinner";
 function Login() {
+  const [loading, setLoading] = useState(false);
   const [justifyActive, setJustifyActive] = useState('login');
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -37,6 +38,7 @@ function Login() {
   const handleLogin=async(e)=>{
     e.preventDefault()
     try{
+      setLoading(true)
       const res=await axios.post('/api/v1/auth/login',{
         email2,password2
       })
@@ -63,6 +65,7 @@ function Login() {
   const handleSignup=async(e)=>{
     e.preventDefault()
     try{
+      setLoading(true)
       const res=await axios.post('/api/v1/auth/signup',{name,email,password,phone,question})
       if(res &&res.data.success){
         toast.success(res.data.message)
@@ -104,7 +107,19 @@ function Login() {
     setJustifyActive(value);
   }
   return (
-    <div>
+    <>
+    {loading?( <ThreeCircles
+          height="100"
+          width="100"
+          color="#656565"
+          wrapperStyle={{}}
+          wrapperClass="justify-content-center align-items-center h-100"
+          visible={true}
+          ariaLabel="three-circles-rotating"
+          outerCircleColor=""
+          innerCircleColor=""
+          middleCircleColor=""
+        />):(<div>
       <MDBContainer className="p-3 my-5 d-flex flex-column col-md-6 col-12">
 
         <MDBTabs pills justify className='mb-3 d-flex flex-row justify-content-between'>
@@ -199,7 +214,7 @@ function Login() {
         </MDBTabsContent>
 
       </MDBContainer>
-    </div>
+    </div>)}</>
   );
 }
 

@@ -68,3 +68,10 @@
     color: #eb3629;
     font-weight: 700;
 }
+label{
+    color: #656565;
+    font-weight: 700;
+    font-size: medium;
+    letter-spacing: 0.1rem;
+    margin-bottom: 1em;
+}

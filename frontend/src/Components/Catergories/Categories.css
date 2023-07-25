@@ -12,34 +12,22 @@
     
 }
 .card{
-    width: 15em;
-    height: 20em;
     border: none;
     border-radius: 1.1em;
     margin: auto; 
 }
 
 .card-img{
-    width: 15em;
-    height: 20em;
+
     border-radius: 1em;
     
 }
-.card-title1{
-    text-transform: uppercase;
-    transition: 0.5s;
-    color: transparent;
-    transform: translateY(750%);
-   
-}
+
 .card:hover .card-img{
     -webkit-mask-image: linear-gradient(#080808,rgba(0, 0, 0, 0.3));
     mask-image:linear-gradient(#000000,rgba(0, 0, 0, 0.3));
 }
-.card:hover .card-title1{
-    transform: translateY(400%);
-    color: #353535;
-}
+
 .card:hover .t{
     color: #ffffff;
 }

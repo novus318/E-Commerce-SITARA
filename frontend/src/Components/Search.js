@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import '../Components/Header/Header.css';
 import { useSearch } from '../store/SearchContext';
 import { MDBIcon } from 'mdb-react-ui-kit';
