@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom'
 import { MDBIcon } from 'mdb-react-ui-kit'
 import { useAuth } from '../../store/authContext';
 import toast from 'react-hot-toast';
-import {  useEffect, useState } from 'react';
+import React,{  useEffect, useState } from 'react';
 import axios from 'axios';
 import Search from '../Search';
 import { useCart } from '../../store/CartContext';

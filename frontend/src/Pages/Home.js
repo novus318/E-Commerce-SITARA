@@ -67,7 +67,7 @@ function Home(props) {
           <Categories categories={categories} />
           <Recomendation products={products} />
           <BestSellers products={products} />
-          <Footer />
+          <Footer categories={categories}/>
         </>
       ) : (
         <ThreeCircles

@@ -4,7 +4,7 @@ import { Modal } from "antd";
 import Header from "../Components/Header/Header";
 import { useCart } from "../store/CartContext";
 import { useNavigate } from "react-router-dom";
-import { MDBBtn, MDBIcon, MDBRadio, MDBTextArea } from "mdb-react-ui-kit";
+import { MDBBtn, MDBIcon, MDBTextArea } from "mdb-react-ui-kit";
 import { useAuth } from "../store/authContext";
 import { ThreeCircles } from "react-loader-spinner";
 import toast from "react-hot-toast";
@@ -12,6 +12,7 @@ import axios from "axios";
 function Cart() {
   const [auth, setAuth] = useAuth();
   const { cart, setCart } = useCart();
+  const [paymentMethod,setPaymentMethod] = useState(null);
   const [loading, setLoading] = useState(false);
   const [visible, setVisible] = useState(false);
   const [checkout, setCheckout] = useState(false);
@@ -68,6 +69,45 @@ function Cart() {
       toast.error("Something went wrong");
     }
   };
+  //orderId
+  function generateOrderId() {
+    const timestamp = Date.now().toString();
+    const randomString = Math.random().toString(36).substr(2, 5);
+    return `${timestamp}-${randomString}`;
+  }
+
+  //payment
+  const handleProceedOrder = async () => {
+    //client side
+    try {
+      if (paymentMethod === 'online') {
+        setCheckout(false)
+        setLoading(true)
+        const { data } = await axios.post('/api/v1/product/payment-online', {
+          orderId: generateOrderId(),
+          amount: totalPrice(),
+          customerId: auth.user._id,
+          email: auth.user.email, 
+      })
+      console.log(data.order)
+
+    } else if (paymentMethod === 'cod') {
+        setCheckout(false)
+        setLoading(true)
+        const { data } = await axios.post('/api/v1/product/payment-cod', {
+          cart:cart,
+          user:auth.user._id
+          });
+       if(data.success){
+        navigate('/user/orders')
+       }
+      }
+    } catch (error) {
+      setLoading(false)
+      console.error('Error placing order:', error);
+    }
+  };
+
   return (
     <>
       {loading ? (
@@ -86,7 +126,7 @@ function Cart() {
       ) : (
         <>
           <Header />
-          <div className="row g-0">
+          <div className="row g-0 container-fluid">
             <div className="col-lg-8">
               <div className="container-fluid">
                 <div className="d-flex justify-content-between align-items-center mb-3 mt-4">
@@ -257,22 +297,22 @@ function Cart() {
             visible={checkout}
           >
             <div className="mt-3">
-              <MDBRadio
-                name="payment"
+              <MDBBtn
+              onClick={()=>{setPaymentMethod('online')
+              handleProceedOrder()}}
                 value="online"
                 id="online"
-                label="Online payment"
-              />
-              <MDBRadio
-                name="payment"
+                className="cart-btn col-12 mb-4 mt-2"
+                >Online Payment</MDBBtn>
+              <br/>
+              <MDBBtn
+              onClick={()=>{setPaymentMethod('cod')
+              handleProceedOrder()}}
                 value="cod"
                 id="cod"
-                label="Cash On delevery"
-              />
+                className="cart-btn col-12"
+              >Cash on delevery</MDBBtn>
             </div>
-            <MDBBtn className="btn-login" type="submit">
-              Proceed Order
-            </MDBBtn>
           </Modal>
         </>
       )}

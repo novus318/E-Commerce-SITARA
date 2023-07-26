@@ -20,6 +20,7 @@ import AllProducts from './Pages/AllProducts';
 import SearchProducts from './Pages/SearchProducts';
 import ProductDetails from './Pages/ProductDetails';
 import Cart from './Pages/Cart';
+import React from 'react';
 function App() {
   
   return (

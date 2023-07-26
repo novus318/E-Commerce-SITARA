@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React,{ useEffect, useState } from "react";
 import { useAuth } from "../../store/authContext";
 import { Outlet } from "react-router-dom";
 import axios from "axios";

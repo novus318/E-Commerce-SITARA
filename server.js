@@ -9,7 +9,7 @@ import productRoutes from './routes/productRoute.js'
 import bannerRoutes from './routes/bannerRoutes.js'
 import cors from 'cors'
 //configure env
-dotenv.config()
+dotenv.config({ path: './.env' })
 
 //database config
 connectDB();

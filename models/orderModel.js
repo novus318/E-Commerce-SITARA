@@ -3,12 +3,12 @@ import mongoose from "mongoose";
 const orderSchema = new mongoose.Schema({
  products:[{
   type:mongoose.ObjectId,
-  ref: 'product',
+  ref: 'products',
 }],
 payment:[],
 buyer:{
   type:mongoose.ObjectId,
-  ref:'user'
+  ref:'users'
 
 },
 status:{

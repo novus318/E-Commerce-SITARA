@@ -1,4 +1,3 @@
-
 import {
   MDBFooter,
   MDBContainer,
@@ -9,8 +8,9 @@ import {
 } from 'mdb-react-ui-kit';
 import './Footer.css';
 import { Link } from 'react-router-dom';
+import React from 'react';
 
-function Footer() {
+function Footer({categories}) {
   return (
     <div>
      <MDBFooter className='text-center footer' color='white'>
@@ -73,26 +73,13 @@ function Footer() {
               <h5 className='text-uppercase fh'>Categories</h5>
 
               <ul className='list-unstyled mb-0 '>
-                <li>
-                <Link to='/item1' className='cursor'>
-                    item 1
-                </Link>
-                </li>
-                <li>
-                <Link to='/item2' className='cursor'>
-                    item 2
-                </Link>
-                </li>
-                <li>
-                <Link to='/item3' className='cursor'>
-                    item 3
-                </Link>
-                </li>
-                <li>
-                <Link to='/item4' className='cursor'>
-                    item 4
-                </Link>
-                </li>
+                {categories?.map(c=>(
+                  <li>
+                  <Link to={`/products/${c._id}`} className='cursor'>
+                      {c.name}
+                  </Link>
+                  </li>
+                ))}
               </ul>
             </MDBCol>
           </MDBRow>

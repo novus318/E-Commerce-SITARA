@@ -11,7 +11,7 @@ const { Option } = Select;
 function UpdateProduct() {
   const [id, setId] = useState("");
   const [loading, setLoading] = useState(true);
-  const [categories, setCategories] = useState([]);
+  const [categories, setCategories] = useState([])
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");

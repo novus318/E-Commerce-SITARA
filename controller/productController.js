@@ -1,6 +1,16 @@
 import slugify from 'slugify'
 import productModel from '../models/productModel.js'
+import orderModel from '../models/orderModel.js'
 import fs from 'fs'
+import Razorpay from 'razorpay'
+
+const razorpayKeyId = 'rzp_test_dvl3LY2xBmkM6D';
+const razorpayKeySecret = 'VM2P4bYJXmdj5hC8oQLpTn0B';
+function generateUniqueTransactionId() {
+    const timestamp = Date.now().toString();
+    const randomString = Math.random().toString(36).substr(2, 8);
+    return `${timestamp}-${randomString}`
+}
 export const createProductController=async(req,res)=>{
     try {
         const {name,slug,description,price,sizes,category,quantity,shipping}=req.fields
@@ -323,5 +333,74 @@ export const relatedProductontroller =async(req,res)=>{
             message:'Error while getting product',
             error
         })
+    }
+}
+
+export const codPaymentController =async(req,res)=>{
+    try {
+        const { cart,user } = req.body;
+    
+        const order = new orderModel({
+        products: cart, 
+        payment:'COD', 
+        buyer: user,
+        status: 'Not processed',
+        });
+    
+        await order.save();
+    
+        res.status(200).send({ success: true, message: 'Order placed successfully',order });
+      } catch (error) {
+        console.log(error)
+        res.status(500).send({ success: false, message: 'Error placing COD order',error });
+      }
+}
+
+export const onlinePaymentController=async(req,res)=>{
+   //server side
+    try {
+        const { orderId, customerId, email, amount, paymentMethod } = req.body;
+        const transactionId = generateUniqueTransactionId()
+        const razorpay = new Razorpay({
+            key_id: razorpayKeyId,
+            key_secret: razorpayKeySecret,
+          });
+          const options = {
+            amount: amount * 100,
+            currency: 'INR',
+            receipt: orderId,
+            payment_capture: 1,
+            notes: {
+              customer_id: customerId,
+              email,
+              transaction_id: transactionId,
+            },
+          };
+          razorpay.orders.create(options, (err, order) => {
+            if (err) {
+              console.error('Error creating Razorpay order:', err);
+              res.status(500).send({ success: false, message: 'Payment initiation failed' });
+            } else {
+              res.status(200).send({ success: true, order });
+            }
+          });
+      } catch (error) {
+        console.error('Error initiating payment:', error);
+      }
+}
+
+export const verifyRazorpayPaymentController=async(req,res)=>{
+    try {
+          const { paymentResponse } = req.body;
+          console.log('Verifying Razorpay Payment:', paymentResponse)
+             if (paymentResponse && paymentResponse.razorpay_payment_id) {
+                
+      res.status(200).json({ success: true, message: 'Payment successful' });
+    } else {
+      // Payment failed or not verified
+      res.status(400).json({ success: false, message: 'Payment failed or not verified' });
+    }
+    } catch (error) {
+        console.log(error)
     }
 }
