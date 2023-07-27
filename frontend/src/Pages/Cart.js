@@ -142,7 +142,7 @@ const initPayment=(data)=>{
         }
       } catch (error) {
         setLoading(false)
-        console.log(error)
+        toast.error('Something went wrong')
       }
     },
     theme: {

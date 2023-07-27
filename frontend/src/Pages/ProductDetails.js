@@ -66,7 +66,7 @@ function ProductDetails() {
       else{
          addToCart(product,size,count)
           toast.success('Item added to cart')
-          
+          navigate('/user/cart')
         };
     } catch (error) {
       

@@ -1,4 +1,4 @@
-import React,{ useContext, useState } from 'react';
+import React,{ useState } from 'react';
 import './Login.css';
 import { useGoogleLogin } from '@react-oauth/google';
 import { FbAppId } from '../../api credentials/Api'
@@ -15,7 +15,6 @@ import {
   MDBInput,
   MDBCheckbox
 } from 'mdb-react-ui-kit';
-import {  UserContext } from '../../store/userContext';
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -85,12 +84,33 @@ function Login() {
       toast.error('something went wrong')
     }
   }
-  const { setUser } = useContext(UserContext)
   const login = useGoogleLogin({
     onSuccess: (codeResponse) => {
-      setUser(codeResponse)
-      toast.success('LoggedIn Successfully')
-      navigate('/')
+      axios.get(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${codeResponse.access_token}`, {
+                    headers: {
+                        Authorization: `Bearer ${codeResponse.access_token}`,
+                        Accept: 'application/json'
+                    }
+                })
+                .then(async(res) => {
+                  setLoading(true)
+                  const nameg=res.data.name
+                  const emailg=res.data.email
+                  const data=await axios.post('/api/v1/auth/google',{emailg,nameg})
+                  if(data){
+                    toast.success(data.data.message)
+                    setAuth({
+                      ...auth,
+                      user:data.data.user,
+                      token:data.token
+                    })
+                    localStorage.setItem('auth',JSON.stringify(data.data))
+                    navigate(location.state ||'/')
+                    window.location.reload()
+                  }else{
+                    toast.error(data.data.message)
+                  }
+                })
     },
     onError: (error) => 
     toast.error('something went wrong')
@@ -148,7 +168,7 @@ function Login() {
                   fields="name,email,picture"
                   callback={responseFacebook}
                   render={(renderProps) => (
-                    <MDBBtn tag='a' color='none' className='m-1 m-auto me-4' onClick={renderProps.onClick}>
+                    <MDBBtn tag='a' color='none' className='m-1 m-auto me-4'>
                       <MDBIcon fab icon='facebook-f' size="2x" />
                     </MDBBtn>
                   )}

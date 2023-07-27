@@ -20,7 +20,7 @@ function Search() {
  return (
     <>
       <div className='ms-auto ps-3'>
-      <form className='d-flex input-group w-auto' onSubmit={handleSearch}>
+      <form className='d-flex input-group w-auto container-fluid' onSubmit={handleSearch}>
         
       <input type='search' value={search.keyword} onChange={
         (e)=>setSearch({...search,keyword:e.target.value})

@@ -412,9 +412,9 @@ export const verifyRazorpayPaymentController=async(req,res)=>{
             .digest('hex')
             if(razorpay_signature === expectedSign){
 
-      res.status(200).json({ success: true, message: 'Payment successful' });
+      res.status(200).send({ success: true, message: 'Payment successful' });
     } else {
-      res.status(400).json({ success: false, message: 'Payment failed or not verified' });
+      res.status(400).send({ success: false, message: 'Payment failed or not verified' });
     }
     } catch (error) {
         console.log(error)
@@ -431,7 +431,7 @@ export const setOnlinePaymentController =async(req,res)=>{
         const order = new orderModel({
         products: cart, 
         payment:{
-            type:'COD',
+            type:'Online',
             total:totalPrice
         }, 
         buyer: user,

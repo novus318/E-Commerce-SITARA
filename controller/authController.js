@@ -1,6 +1,6 @@
 import { comparePassword, hashPassword } from "../helpers/authHelper.js";
 import userModel from "../models/userModel.js";
-import JWT from "jwt-decode";
+import JWT from "jsonwebtoken";
 
 export const signupController = async (req, res) => {
   try {
@@ -155,21 +155,53 @@ export const loginController = async (req, res) => {
 };
 export const googleController = async (req, res) => {
   try {
-    const { email, name } = req.body;
-    const user = await userModel.findOne({ email });
+    const email = req.body.emailg
+    const name = req.body.nameg;
+    const user = await userModel.findOne({email});
     if (user) {
+       //token
+    const token = await JWT.sign({ _id: user._id }, process.env.JWT_SECRET, {
+      expiresIn: "7d",
+    });
       res.status(201).send({
         success: true,
         message: "login successfully",
-        user,
+        user: {
+          _id: user._id,
+          name: user.name,
+          email: user.email,
+          phone: user.phone,
+          city: user.city,
+          zip: user.zip,
+          landmark: user.landmark,
+          state: user.state,
+          address: user.address,
+          role: user.role,
+        },
+        token,
       });
     }
     if (!user) {
-      new userModel({ email, name }).save();
+      const newUser =new userModel({ email, name }).save();
+      const token = await JWT.sign({ _id: newUser._id }, process.env.JWT_SECRET, {
+        expiresIn: "7d",
+      });
       res.status(201).send({
         success: true,
         message: "login successfully",
-        user,
+        user: {
+          _id: newUser._id,
+          name: newUser.name,
+          email: newUser.email,
+          phone: newUser.phone,
+          city: newUser.city,
+          zip: newUser.zip,
+          landmark: newUser.landmark,
+          state: newUser.state,
+          address: newUser.address,
+          role: newUser.role,
+        },
+        token,
       });
     }
   } catch (error) {
