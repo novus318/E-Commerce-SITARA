@@ -346,8 +346,23 @@ export const codPaymentController =async(req,res)=>{
       (total, item) => total + item.price * item.count,
       0
     );
+
+    const productsForOrder = [];
+
+    for (const cartItem of cart) {
+    const { _id,size,count,slug } = cartItem;
+
+    const productForOrder = {
+      product: _id,
+      size,
+      quantity: cartItem.count,
+      slug
+    };
+
+    productsForOrder.push(productForOrder);
+  }
         const order = new orderModel({
-        products: cart, 
+        products: productsForOrder, 
         payment:{
             type:'COD',
             total:totalPrice
@@ -428,8 +443,23 @@ export const setOnlinePaymentController =async(req,res)=>{
       (total, item) => total + item.price * item.count,
       0
     );
+
+    const productsForOrder = [];
+
+      for (const cartItem of cart) {
+      const { _id,size,count,slug} = cartItem;
+
+      const productForOrder = {
+        product: _id,
+        size,
+        quantity: cartItem.count,
+        slug
+      };
+
+      productsForOrder.push(productForOrder);
+    }
         const order = new orderModel({
-        products: cart, 
+        products:productsForOrder, 
         payment:{
             type:'Online',
             total:totalPrice

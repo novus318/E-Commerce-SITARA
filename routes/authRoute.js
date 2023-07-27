@@ -1,5 +1,5 @@
 import express  from "express";
-import {signupController,loginController,testController, googleController,forgotPasswordController, updateProfileController} from '../controller/authController.js'
+import {signupController,loginController,testController, googleController,forgotPasswordController, updateProfileController, getOrdersController, getAllOrdersController, orderStatusController} from '../controller/authController.js'
 import { isAdmin, requireSignIn } from "../middlewares/authMiddleware.js";
 //router object
 const router=express.Router()
@@ -27,4 +27,11 @@ router.get('/admin-auth',requireSignIn,isAdmin,(req,res)=>{
 router.put('/profile/:pid',updateProfileController)
 //test routes
 router.get('/test',requireSignIn,isAdmin,testController)
+
+//order
+router.get('/orders/:pid',getOrdersController)
+
+router.get('/all-orders',getAllOrdersController)
+
+router.put('/order-status/:orderId',orderStatusController)
 export default router

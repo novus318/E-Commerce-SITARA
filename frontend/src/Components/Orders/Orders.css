@@ -1,0 +1,9 @@
+.order{
+    cursor: pointer;
+    font-weight: 600;
+    color: #656565;
+}
+.order:hover{
+    background: #656565;
+    color: #fff;
+}

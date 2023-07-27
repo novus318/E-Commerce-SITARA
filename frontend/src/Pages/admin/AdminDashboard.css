@@ -99,3 +99,15 @@ background-color: #77bd88!important;
     background: #ffffff !important;
     border:solid 0.13em #656565;
 }
+.v-btn{
+    border: none;
+    border-radius: 0.2em;
+    color: #fff;
+    font-weight: 600;
+    background: #656565;
+}
+.v-btn:hover{
+    color: #656565;
+    border: solid #656565 0.1em;
+    background: #fff;
+}

@@ -51,11 +51,13 @@ function Login() {
         localStorage.setItem('auth',JSON.stringify(res.data))
         navigate(location.state ||'/')
       }else{
+        setLoading(false)
         toast.error(res.data.message)
       }
     }
     catch(e){
       console.log(e)
+      setLoading(false)
       toast.error('something went wrong')
     }
    
@@ -76,11 +78,13 @@ function Login() {
         localStorage.setItem('auth',JSON.stringify(res.data))
         navigate(location.state ||'/')
       }else{
+        setLoading(false)
         toast.error(res.data.message)
       }
     }
     catch(e){
       console.log(e)
+      setLoading(false)
       toast.error('something went wrong')
     }
   }
@@ -203,7 +207,7 @@ function Login() {
                   fields="name,email,picture"
                   callback={responseFacebook}
                   render={(renderProps) => (
-                    <MDBBtn tag='a' color='none' className='m-1 m-auto me-4' onClick={renderProps.onClick}>
+                    <MDBBtn tag='a' color='none' className='m-1 m-auto me-4' /*onClick={renderProps.onClick}*/>
                       <MDBIcon fab icon='facebook-f' size="2x" />
                     </MDBBtn>
                   )}
@@ -220,10 +224,9 @@ function Login() {
               <MDBInput wrapperClass='mb-4' onChange={(e)=>{setPassword(e.target.value)}} placeholder='Password' type='password' />
               <MDBInput wrapperClass='mb-4' onChange={(e)=>{setPhone(e.target.value)}} placeholder='Phone number' type='tel' />
               <MDBInput wrapperClass='mb-2' onChange={(e)=>{setQuestion(e.target.value)}} placeholder='Your Favorite person ?' type='text' />
-              <div className='mb-4'>
+              <div className='mb-1'>
                 <p>* Do not forget the answer you can't reset your Password</p>
                 <MDBCheckbox name='flexCheck' label='I have read and agree to the terms' />
-                
               </div>
 
               <MDBBtn className="mb-4 w-100 btn-login">Sign up</MDBBtn>

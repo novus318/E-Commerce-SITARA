@@ -12,7 +12,6 @@ import axios from "axios";
 function Cart() {
   const [auth, setAuth] = useAuth();
   const { cart, setCart } = useCart();
-  const [paymentMethod,setPaymentMethod] = useState(null);
   const [loading, setLoading] = useState(false);
   const [visible, setVisible] = useState(false);
   const [checkout, setCheckout] = useState(false);
@@ -77,10 +76,10 @@ function Cart() {
   }
 
   //payment
-  const handleProceedOrder = async () => {
+  const handleProceedOrder = async (value) => {
     //client side
     try {
-      if (paymentMethod === 'online') {
+      if (value === 'online') {
         setCheckout(false)
         setLoading(true)
         const { data } = await axios.post('/api/v1/product/payment-online', {
@@ -91,7 +90,7 @@ function Cart() {
       })
       initPayment(data.order)
 
-    } else if (paymentMethod === 'cod') {
+    } else if (value === 'cod') {
         setCheckout(false)
         setLoading(true)
         const { data } = await axios.post('/api/v1/product/payment-cod', {
@@ -342,16 +341,16 @@ const initPayment=(data)=>{
           >
             <div className="mt-3">
               <MDBBtn
-              onClick={()=>{setPaymentMethod('online')
-              handleProceedOrder()}}
+              onClick={(e)=>{
+              handleProceedOrder(e.target.value)}}
                 value="online"
                 id="online"
                 className="cart-btn col-12 mb-4 mt-2"
                 >Online Payment</MDBBtn>
               <br/>
               <MDBBtn
-              onClick={()=>{setPaymentMethod('cod')
-              handleProceedOrder()}}
+              onClick={(e)=>{
+              handleProceedOrder(e.target.value)}}
                 value="cod"
                 id="cod"
                 className="cart-btn col-12"
