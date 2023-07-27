@@ -24,7 +24,7 @@ function Cart() {
       (total, item) => total + item.price * item.count,
       0
     );
-    return totalPrice;
+    return totalPrice
   };
   //total items
   const getTotalItemCount = () => {
@@ -78,7 +78,7 @@ function Cart() {
 
   //payment
   const handleProceedOrder = async () => {
-    //client side
+    //client side code
     try {
       if (paymentMethod === 'online') {
         setCheckout(false)
