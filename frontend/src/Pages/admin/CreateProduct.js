@@ -73,7 +73,6 @@ function CreateProduct() {
         setLoading(false);
       }
     } catch (error) {
-      console.log(error);
       toast.error("Something went wrong while loading category");
     }
   };

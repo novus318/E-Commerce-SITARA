@@ -23,7 +23,6 @@ function Home(props) {
         setCategories(data?.category);
       }
     } catch (error) {
-      console.log(error);
       toast.error("Something went wrong while loading category");
     }
   };
@@ -35,7 +34,6 @@ function Home(props) {
         setProducts(data?.products);
       }
     } catch (error) {
-      console.log(error);
       toast.error("Something went wrong while loading category");
     }
   };
@@ -48,7 +46,6 @@ function Home(props) {
         setLoading(false);
       }
     } catch (error) {
-      console.log(error);
       toast.error("Something went wrong while loading Banners");
     }
   };

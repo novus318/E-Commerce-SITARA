@@ -38,7 +38,6 @@ const getAllCategory=async()=>{
       setCategories(data?.category)
     }
   } catch (error) {
-    console.log(error)
     toast.error('Something went wrong while loading category')
   }
 }

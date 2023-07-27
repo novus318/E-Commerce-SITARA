@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
-import { googleId } from "./api credentials/Api";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { AuthProvider } from "./store/authContext";
 import "antd/dist/reset.css";
@@ -13,7 +12,7 @@ root.render(
   <AuthProvider>
     <CartProvider>
       <SearchProvider>
-        <GoogleOAuthProvider clientId={googleId}>
+        <GoogleOAuthProvider clientId={process.env.GOOGLE_ID}>
             <App />
         </GoogleOAuthProvider>
       </SearchProvider>

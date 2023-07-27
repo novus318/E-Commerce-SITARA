@@ -56,7 +56,6 @@ function Login() {
       }
     }
     catch(e){
-      console.log(e)
       setLoading(false)
       toast.error('something went wrong')
     }
@@ -83,7 +82,6 @@ function Login() {
       }
     }
     catch(e){
-      console.log(e)
       setLoading(false)
       toast.error('something went wrong')
     }
@@ -120,7 +118,6 @@ function Login() {
     toast.error('something went wrong')
   });
   const responseFacebook = (response) => {
-    console.log(response);
     navigate('/')
   }
   const handleJustifyClick = (value) => {

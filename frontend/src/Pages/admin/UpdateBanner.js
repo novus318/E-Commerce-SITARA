@@ -27,7 +27,6 @@ function UpdateBanner() {
         window.location.reload()
       }
     } catch (error) {
-      console.log(error);
       toast.error("Something went wrong");
     }
   };
@@ -40,7 +39,6 @@ function UpdateBanner() {
         setLoading(false)
       }
     } catch (error) {
-      console.log(error);
       toast.error("Something went wrong while loading Banners");
     }
   };

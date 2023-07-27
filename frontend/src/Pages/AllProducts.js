@@ -4,6 +4,7 @@ import Header from "../Components/Header/Header";
 import "./AllProducts.css";
 import axios from "axios";
 import { ThreeCircles } from "react-loader-spinner";
+import toast  from "react-hot-toast";
 function AllProducts() {
   const params = useParams();
   const [category, setCategory] = useState([]);
@@ -33,7 +34,7 @@ function AllProducts() {
         setLoading(false);
       }
     } catch (error) {
-      console.log(error);
+      toast.error('Unable to filter')
     }
   };
   //all products

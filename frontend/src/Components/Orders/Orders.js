@@ -19,7 +19,6 @@ const[auth]=useAuth()
   const getOrders =async()=>{
     try {
       const {data} =await axios.get(`/api/v1/auth/orders/${auth.user._id}`)
-      console.log(data)
       setOrders(data)
       setLoading(false)
     } catch (error) {

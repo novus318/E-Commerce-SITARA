@@ -53,7 +53,6 @@ function UpdateProduct() {
         navigate("/admin/products");
       }
     } catch (error) {
-      console.log(error);
       toast.error("Something went wrong");
     }
   };

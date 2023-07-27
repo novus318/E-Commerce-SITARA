@@ -88,7 +88,7 @@ const setDecrease=()=>{
       );
       setSimilarProducts(data.products);
     } catch (error) {
-      console.log(error);
+      
     }
   };
   //get single product
@@ -100,7 +100,7 @@ const setDecrease=()=>{
       setProduct(data?.product);
       getSimilarProduct(data?.product._id, data?.product.category._id);
     } catch (error) {
-      console.log(error);
+     
     }
   };
 

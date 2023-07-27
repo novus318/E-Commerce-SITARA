@@ -38,7 +38,7 @@ function Cart() {
       setCart(myCart);
       localStorage.setItem("cart", JSON.stringify(myCart));
     } catch (error) {
-      console.log(error);
+      toast.error('Unable to remove Item')
     }
   };
   //Adrress
@@ -105,7 +105,6 @@ function Cart() {
       }
     } catch (error) {
       setLoading(false)
-      console.error('Error placing order:', error);
     }
   };
   //set online payment data

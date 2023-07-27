@@ -29,7 +29,6 @@ function Orders() {
         "Order Cancelled",
       ])
       const { data } = await axios.get("/api/v1/auth/all-orders");
-      console.log(data);
       setOrders(data);
       setLoading(false);
     } catch (error) {

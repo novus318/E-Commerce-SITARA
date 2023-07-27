@@ -4,6 +4,7 @@ import { useSearch } from '../store/SearchContext';
 import { MDBIcon } from 'mdb-react-ui-kit';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
 function Search() {
  const [search,setSearch]=useSearch()
  const navigate=useNavigate()
@@ -14,7 +15,7 @@ function Search() {
     setSearch({...search, results: data})
     navigate('/search')
   } catch (error) {
-    console.log(error)
+    toast.error('Unable to search')
   }
  } 
  return (
