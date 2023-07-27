@@ -24,7 +24,7 @@ function Cart() {
       (total, item) => total + item.price * item.count,
       0
     );
-    return totalPrice
+    return totalPrice;
   };
   //total items
   const getTotalItemCount = () => {
@@ -78,18 +78,18 @@ function Cart() {
 
   //payment
   const handleProceedOrder = async () => {
-    //client side code
+    //client side
     try {
       if (paymentMethod === 'online') {
         setCheckout(false)
         setLoading(true)
         const { data } = await axios.post('/api/v1/product/payment-online', {
           orderId: generateOrderId(),
-          amount: totalPrice(),
+          amount: cart,
           customerId: auth.user._id,
           email: auth.user.email, 
       })
-      console.log(data.order)
+      initPayment(data.order)
 
     } else if (paymentMethod === 'cod') {
         setCheckout(false)
@@ -99,6 +99,8 @@ function Cart() {
           user:auth.user._id
           });
        if(data.success){
+        localStorage.removeItem('cartItems')
+        setCart([])
         navigate('/user/orders')
        }
       }
@@ -107,7 +109,49 @@ function Cart() {
       console.error('Error placing order:', error);
     }
   };
-
+  //set online payment data
+  const setOnline=async()=>{
+    const {data}=await axios.post('/api/v1/product/payment-online-set', {
+      cart:cart,
+      user:auth.user._id
+      })
+      if(data.success){
+        localStorage.removeItem('cartItems')
+        setCart([])
+      }
+  }
+//init payment
+const initPayment=(data)=>{
+  const options={
+    key:process.env.RAZORPAY_KEY_ID,
+    amount:data.amount,
+    currency:data.currency,
+    name:data.name,
+    description:'order payment',
+    order_id:data.id,
+    handler:async(response)=>{
+      try {
+        const {data}=await axios.post('/api/v1/product/verifyRazorpayPayment',response)
+        if(data.success){
+          setOnline()
+          toast.success('Payment successfull')
+        navigate('/user/orders')
+        }else{
+          setLoading(false)
+          toast.error('retry payment')
+        }
+      } catch (error) {
+        setLoading(false)
+        console.log(error)
+      }
+    },
+    theme: {
+      color: "#656565",
+    },
+  }
+  const rzp1=new window.Razorpay(options)
+  rzp1.open();
+}
   return (
     <>
       {loading ? (

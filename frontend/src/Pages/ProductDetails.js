@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Header from "../Components/Header/Header";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { ThreeCircles } from "react-loader-spinner";
 import axios from "axios";
 import "./AllProducts.css";
@@ -14,6 +14,7 @@ import { useAuth } from "../store/authContext";
 
 function ProductDetails() {
   const params = useParams();
+  const navigate=useNavigate()
   const [product, setProduct] = useState({});
   const [auth] = useAuth();
   const {addToCart}=useCart()
@@ -50,11 +51,28 @@ function ProductDetails() {
       else{
          addToCart(product,size,count)
           toast.success('Item added to cart')
+          navigate('/user/cart')
         };
     } catch (error) {
       
     }
   };
+  const handdleBuyNow = (product, size, count) => {
+    try {
+      if(!size){
+       toast.error('Select size')
+        return
+      }
+      else{
+         addToCart(product,size,count)
+          toast.success('Item added to cart')
+          
+        };
+    } catch (error) {
+      
+    }
+  };
+  //BuyNow
 //quantity
 const setIncrease=()=>{
   count < product.quantity ? setCount(count+1):setCount(product.quantity) 
@@ -236,9 +254,10 @@ const setDecrease=()=>{
                     ) }
                     {auth?.user?.role === 0 && (
                       <>
-                        <button className="buy-btn p-1 ps-2 pe-2 me-3">
+                        <button className="buy-btn p-1 ps-2 pe-2 me-3"
+                        onClick={()=>handdleBuyNow(product,size,count)}>
                           <i className="me-1 fa fa-credit-card-alt fa-lg" /> Buy
-                          now{" "}
+                          now
                         </button>
                         <button
                           className="cart-btn p-1 ps-2 pe-2 me-3"

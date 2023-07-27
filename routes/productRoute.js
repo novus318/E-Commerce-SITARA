@@ -15,6 +15,7 @@ import {
   productPhoto4Controller,
   relatedProductontroller,
   searchProductController,
+  setOnlinePaymentController,
   updateProductController,
   verifyRazorpayPaymentController,
 } from "../controller/productController.js";
@@ -54,6 +55,7 @@ router.get("/related-product/:pid/:cid", relatedProductontroller);
 //payment
 router.post("/payment-cod", codPaymentController);
 
+router.post("/payment-online-set",setOnlinePaymentController)
 router.post("/payment-online", onlinePaymentController);
 
 router.post("/verifyRazorpayPayment", verifyRazorpayPaymentController);

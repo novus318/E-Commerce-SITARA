@@ -3,9 +3,12 @@ import productModel from '../models/productModel.js'
 import orderModel from '../models/orderModel.js'
 import fs from 'fs'
 import Razorpay from 'razorpay'
+import crypto from 'crypto'
+import dotenv from 'dotenv'
+dotenv.config()
+const razorpayKeyId = process.env.RAZORPAY_KEY_ID;
+const razorpayKeySecret = process.env.RAZORPAY_KEY_SECRET;
 
-const razorpayKeyId = 'rzp_test_dvl3LY2xBmkM6D';
-const razorpayKeySecret = 'VM2P4bYJXmdj5hC8oQLpTn0B';
 function generateUniqueTransactionId() {
     const timestamp = Date.now().toString();
     const randomString = Math.random().toString(36).substr(2, 8);
@@ -339,10 +342,16 @@ export const relatedProductontroller =async(req,res)=>{
 export const codPaymentController =async(req,res)=>{
     try {
         const { cart,user } = req.body;
-    
+         const totalPrice = cart.reduce(
+      (total, item) => total + item.price * item.count,
+      0
+    );
         const order = new orderModel({
         products: cart, 
-        payment:'COD', 
+        payment:{
+            type:'COD',
+            total:totalPrice
+        }, 
         buyer: user,
         status: 'Not processed',
         });
@@ -361,12 +370,17 @@ export const onlinePaymentController=async(req,res)=>{
     try {
         const { orderId, customerId, email, amount, paymentMethod } = req.body;
         const transactionId = generateUniqueTransactionId()
+        const totalPrice = amount.reduce(
+      (total, item) => total + item.price * item.count,
+      0
+    );
+        
         const razorpay = new Razorpay({
             key_id: razorpayKeyId,
             key_secret: razorpayKeySecret,
           });
           const options = {
-            amount: amount * 100,
+            amount: totalPrice * 100,
             currency: 'INR',
             receipt: orderId,
             payment_capture: 1,
@@ -391,16 +405,44 @@ export const onlinePaymentController=async(req,res)=>{
 
 export const verifyRazorpayPaymentController=async(req,res)=>{
     try {
-          const { paymentResponse } = req.body;
-          console.log('Verifying Razorpay Payment:', paymentResponse)
-             if (paymentResponse && paymentResponse.razorpay_payment_id) {
-                
+          const { razorpay_order_id,razorpay_payment_id,razorpay_signature } = req.body;
+            const sign = razorpay_order_id + '|' + razorpay_payment_id
+            const expectedSign =crypto.createHmac('sha256',razorpayKeySecret)
+            .update(sign.toString())
+            .digest('hex')
+            if(razorpay_signature === expectedSign){
+
       res.status(200).json({ success: true, message: 'Payment successful' });
     } else {
-      // Payment failed or not verified
       res.status(400).json({ success: false, message: 'Payment failed or not verified' });
     }
     } catch (error) {
         console.log(error)
+        res.status(500).send({success:false,message:'Internal server error'},error)
     }
+}
+export const setOnlinePaymentController =async(req,res)=>{
+    try {
+        const { cart,user } = req.body;
+     const totalPrice = cart.reduce(
+      (total, item) => total + item.price * item.count,
+      0
+    );
+        const order = new orderModel({
+        products: cart, 
+        payment:{
+            type:'COD',
+            total:totalPrice
+        }, 
+        buyer: user,
+        status: 'Not processed',
+        });
+    
+        await order.save();
+    
+        res.status(200).send({ success: true, message: 'Order saved successfully',order });
+      } catch (error) {
+        console.log(error)
+        res.status(500).send({ success: false, message: 'Error saving online order',error });
+      }
 }
