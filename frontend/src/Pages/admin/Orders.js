@@ -35,6 +35,28 @@ function Orders() {
       toast.error("Error in getting orders");
     }
   };
+  //delete orders
+const handleDelete = async (orderId) => {
+  try {
+    let answer = window.confirm("Are you sure to delete the order");
+    if (!answer) return;
+    setLoading(true)
+    const { data } = await axios.delete(
+      `/api/v1/auth/delete-order/${orderId}`
+    );
+    if (data?.success) {
+      toast.success("Order deleted successfully");
+      getOrders()
+      setLoading(false)
+    } else {
+      setLoading(false)
+      toast.error(data.message);
+    }
+  } catch (error) {
+    setLoading(false)
+    toast.error("Something went wrong");
+  }
+};
   useEffect(() => {
     if (auth?.token) getOrders();
     // eslint-disable-next-line
@@ -115,10 +137,11 @@ function Orders() {
                                   setSelectedOrder(o);
                                   setVisible(true);
                                 }}
-                                className="v-btn p-1 pe-2 ps-2"
+                                className="v-btn p-1 pe-2 ps-2 me-2"
                               >
                                 View
                               </button>
+                              <button className="v-btn p-1 pe-2 ps-2" onClick={()=>{handleDelete(o._id)}}>delete</button>
                             </td>
                           </tr>
                         </>

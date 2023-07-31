@@ -86,6 +86,25 @@ export const getProductController= async(req,res)=>{
         })
     }
 }
+export const getRecommendedProductController= async(req,res)=>{
+    try {
+        const products=await productModel.find({}).populate('category').select('-photo').limit(15).sort({createdAt:1})
+        res.status(200).send({
+            success:true,
+            totalCount:products.length,
+            message:'All products',
+            products
+        })
+    } catch (error) {
+        console.log(error)
+        res.status(500).send({
+            
+            success:false,
+            message:"Error in getting products",
+            error:error.message
+        })
+    }
+}
 export const getSingleProductController=async(req,res)=>{
     try {
         const product= await productModel.findOne({slug:req.params.slug}).select('-photo').populate('category')

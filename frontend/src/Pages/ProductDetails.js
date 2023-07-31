@@ -252,7 +252,7 @@ const setDecrease=()=>{
                       </div>
                     </div>
                     ) }
-                    {auth?.user?.role === 0 && (
+                    {!auth?.user?.role === 1 ? '': (
                       <>
                         <button className="buy-btn p-1 ps-2 pe-2 me-3"
                         onClick={()=>handdleBuyNow(product,size,count)}>

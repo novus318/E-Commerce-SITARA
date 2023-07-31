@@ -4,6 +4,7 @@ import {
   createProductController,
   deleteProductController,
   getProductController,
+  getRecommendedProductController,
   getSingleProductController,
   onlinePaymentController,
   productCountController,
@@ -32,6 +33,8 @@ router.put(
 );
 //get products
 router.get("/get-product", getProductController);
+
+router.get("/get-recommended", getRecommendedProductController);
 //single product
 router.get("/get-product/:slug", getSingleProductController);
 //get-photo

@@ -11,6 +11,7 @@ import { ThreeCircles } from "react-loader-spinner";
 
 function Home(props) {
   const [products, setProducts] = useState([]);
+  const [productsR, setProductsR] = useState([]);
   const [categories, setCategories] = useState([]);
   const [banners, setBanners] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -37,6 +38,17 @@ function Home(props) {
       toast.error("Something went wrong while loading category");
     }
   };
+  //get all reccomended
+  const getAllProductsRecommended = async () => {
+    try {
+      const { data } = await axios.get("/api/v1/product/get-recommended");
+      if (data?.success) {
+        setProductsR(data?.products);
+      }
+    } catch (error) {
+      toast.error("Something went wrong while loading category");
+    }
+  };
   //banners
   const getAllBanners = async () => {
     try {
@@ -53,6 +65,7 @@ function Home(props) {
   useEffect(() => {
     getAllBanners();
     getAllProduct();
+    getAllProductsRecommended();
     getAllCategory();
   }, []);
   return (
@@ -62,7 +75,7 @@ function Home(props) {
           <Header />
           <Banner banners={banners} />
           <Categories categories={categories} />
-          <Recomendation products={products} />
+          <Recomendation products={productsR} />
           <BestSellers products={products} />
           <Footer categories={categories}/>
         </>

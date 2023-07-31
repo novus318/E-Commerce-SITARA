@@ -307,6 +307,23 @@ export const getOrdersController=async(req,res)=>{
     })
   }
 }
+//delete orders
+export const deleteOrderController =async(req,res)=>{
+  try {
+      await orderModel.findByIdAndDelete(req.params.pid)
+      res.status(200).send({
+          success:true,
+          message:'Order deleted Successfully'
+      })
+  } catch (error) {
+      console.log(error)
+      res.status(500).send({
+          success:false,
+          message:'Error while deleting order',
+          error
+      })
+  }
+}
 
 // all orders
 export const getAllOrdersController=async(req,res)=>{
