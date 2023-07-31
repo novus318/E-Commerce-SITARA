@@ -2,7 +2,6 @@ import React from 'react'
 import {Helmet} from "react-helmet";
 import { Toaster } from 'react-hot-toast';
 import { Scrollbars } from 'react-custom-scrollbars'
-
 function Layout({children,title,description,keywords,author}) {
   return (
     <div>

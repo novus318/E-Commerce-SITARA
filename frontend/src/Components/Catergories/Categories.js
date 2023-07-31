@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 
-function Categories({setLoading}) {
+function Categories() {
    const [categories, setCategories] = useState([]);
     //get all category
 
@@ -14,7 +14,6 @@ function Categories({setLoading}) {
       const { data } = await axios.get("/api/v1/category/get-category");
       if (data?.success) {
         setCategories(data?.category);
-        setLoading(false)
       }
     } catch (error) {
       toast.error("Something went wrong while loading category");
@@ -22,6 +21,7 @@ function Categories({setLoading}) {
   };
    useEffect(() => {
     getAllCategory();
+    // eslint-disable-next-line
   }, []);
   return(
     <div className='categories'>

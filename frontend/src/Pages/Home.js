@@ -1,41 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Recomendation from "../Components/Recomendation/Recomendation";
 import Header from "../Components/Header/Header";
 import Banner from "../Components/Banner/Banner";
 import Footer from "../Components/Footer/Footer";
 import Categories from "../Components/Catergories/Categories";
 import BestSellers from "../Components/Best sellers/BestSellers";
-import { ThreeCircles } from "react-loader-spinner";
 
 function Home(props) {
-  const [loading, setLoading] = useState(true);
  //banners
   return (
-    <div className="home">
-      {!loading ? (
         <>
           <Header />
-          <Banner setLoading={setLoading} />
-          <Categories  setLoading={setLoading}/>
-          <Recomendation setLoading={setLoading} />
-          <BestSellers setLoading={setLoading} />
-          <Footer setLoading={setLoading}/>
+          <Banner/>
+          <Categories  />
+          <Recomendation  />
+          <BestSellers  />
+          <Footer />
         </>
-      ) : (
-        <ThreeCircles
-          height="100"
-          width="100"
-          color="#656565"
-          wrapperStyle={{}}
-          wrapperClass="justify-content-center align-items-center h-100"
-          visible={true}
-          ariaLabel="three-circles-rotating"
-          outerCircleColor=""
-          innerCircleColor=""
-          middleCircleColor=""
-        />
-      )}
-    </div>
+      
   );
 }
 

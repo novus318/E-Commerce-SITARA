@@ -12,7 +12,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 
-function Footer({setLoading}) {
+function Footer() {
   const [categories, setCategories] = useState([]);
     //get all category
 
@@ -21,7 +21,6 @@ function Footer({setLoading}) {
       const { data } = await axios.get("/api/v1/category/get-category");
       if (data?.success) {
         setCategories(data?.category);
-        setLoading(false)
       }
     } catch (error) {
       toast.error("Something went wrong while loading category");
@@ -29,6 +28,7 @@ function Footer({setLoading}) {
   };
    useEffect(() => {
     getAllCategory();
+    // eslint-disable-next-line
   }, []);
   return (
     <div>

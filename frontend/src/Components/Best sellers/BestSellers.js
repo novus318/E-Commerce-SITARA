@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 
-function BestSellers({setLoading}) {
+function BestSellers() {
   const [products, setProducts] = useState([]);
     const responsive = {
         superLargeDesktop: {
@@ -33,7 +33,6 @@ function BestSellers({setLoading}) {
       const { data } = await axios.get("/api/v1/product/get-recommended");
       if (data?.success) {
         setProducts(data?.products);
-        setLoading(false)
       }
     } catch (error) {
       toast.error("Something went wrong while loading category");
@@ -41,6 +40,7 @@ function BestSellers({setLoading}) {
   };
        useEffect(() => {
     getAllProductsRecommended();
+    // eslint-disable-next-line
   }, []);
   return (
     <div className='mt-4 mb-4'>
