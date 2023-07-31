@@ -3,7 +3,7 @@ import toast from 'react-hot-toast';
 import './Banner.css';
 import React,{ useEffect, useState } from 'react';
 import Carousel from 'react-bootstrap/Carousel';
-function Banner() {
+function Banner({setLoading}) {
   const [index, setIndex] = useState(0);
   const [banners, setBanners] = useState([]);
   const handleSelect = (selectedIndex) => {
