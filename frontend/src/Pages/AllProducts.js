@@ -34,7 +34,7 @@ function AllProducts() {
         setLoading(false);
       }
     } catch (error) {
-      toast.error('Unable to filter')
+      toast.error('Something went wrong')
     }
   };
   //all products
