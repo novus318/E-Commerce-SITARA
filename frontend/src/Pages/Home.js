@@ -63,10 +63,10 @@ function Home(props) {
   };
 
   useEffect(() => {
-    getAllBanners();
     getAllProduct();
     getAllProductsRecommended();
     getAllCategory();
+    getAllBanners();
   }, []);
   return (
     <div className="home">

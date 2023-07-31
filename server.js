@@ -11,7 +11,7 @@ import cors from 'cors'
 import path from 'path'
 import {fileURLToPath} from 'url'
 //configure env
-dotenv.config({ path: './.env' })
+dotenv.config()
 
 //database config
 connectDB();
@@ -35,7 +35,7 @@ app.use('/api/v1/banner',bannerRoutes)
 
 //rest api
 app.use('*',function(req,res){
-    res.sendFile(path.join(__dirname,'./frontend.build/index.html'))
+    res.sendFile(path.join(__dirname,'./frontend/build/index.html'))
 })
 
 //port
