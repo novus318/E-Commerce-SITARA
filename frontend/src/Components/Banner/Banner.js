@@ -1,11 +1,29 @@
+import axios from 'axios';
+import toast from 'react-hot-toast';
 import './Banner.css';
-import React,{ useState } from 'react';
+import React,{ useEffect, useState } from 'react';
 import Carousel from 'react-bootstrap/Carousel';
-function Banner({banners}) {
+function Banner() {
   const [index, setIndex] = useState(0);
+  const [banners, setBanners] = useState([]);
   const handleSelect = (selectedIndex) => {
     setIndex(selectedIndex);
   };
+    //banners
+    const getAllBanners = async ({setLoading}) => {
+      try {
+        const { data } = await axios.get("/api/v1/banner/get-banners");
+        if (data?.success) {
+          setBanners(data?.banners)
+          setLoading(false);
+        }
+      } catch (error) {
+        toast.error("Something went wrong while loading Banners");
+      }
+    };
+      useEffect(() => {
+    getAllBanners()
+  }, []);
   
   return (
     <div className='banner'>

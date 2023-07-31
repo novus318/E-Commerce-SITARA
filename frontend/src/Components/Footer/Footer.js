@@ -8,9 +8,28 @@ import {
 } from 'mdb-react-ui-kit';
 import './Footer.css';
 import { Link } from 'react-router-dom';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import toast from 'react-hot-toast';
 
-function Footer({categories}) {
+function Footer({setLoading}) {
+  const [categories, setCategories] = useState([]);
+    //get all category
+
+  const getAllCategory = async () => {
+    try {
+      const { data } = await axios.get("/api/v1/category/get-category");
+      if (data?.success) {
+        setCategories(data?.category);
+        setLoading(false)
+      }
+    } catch (error) {
+      toast.error("Something went wrong while loading category");
+    }
+  };
+   useEffect(() => {
+    getAllCategory();
+  }, []);
   return (
     <div>
      <MDBFooter className='text-center footer' color='white'>

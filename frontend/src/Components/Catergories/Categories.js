@@ -1,10 +1,28 @@
 import React,{ Link } from 'react-router-dom';
 import './Categories.css';
 import Card from 'react-bootstrap/Card';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import toast from 'react-hot-toast';
 
-function Categories({categories}) {
-  
-  
+function Categories({setLoading}) {
+   const [categories, setCategories] = useState([]);
+    //get all category
+
+  const getAllCategory = async () => {
+    try {
+      const { data } = await axios.get("/api/v1/category/get-category");
+      if (data?.success) {
+        setCategories(data?.category);
+        setLoading(false)
+      }
+    } catch (error) {
+      toast.error("Something went wrong while loading category");
+    }
+  };
+   useEffect(() => {
+    getAllCategory();
+  }, []);
   return(
     <div className='categories'>
       <div className='text-center mt-3'>
