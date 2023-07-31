@@ -6,9 +6,9 @@
   "type": "module",
   "scripts": {
     "start": "node server.js",
+    "build":"npm i",
     "server": "nodemon server.js",
-    "client": "npm start --prefix ./frontend",
-    "dev": "concurrently \"npm run start\" \"npm run client\""
+    "dev": "npm run start"
   },
   "repository": {
     "type": "git",
