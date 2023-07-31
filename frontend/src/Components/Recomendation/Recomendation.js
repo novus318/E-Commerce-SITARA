@@ -1,13 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import './Recomendation.css'
 import { Link } from 'react-router-dom';
-import axios from 'axios';
-import toast from 'react-hot-toast';
 
-function Recomendation() {
-  const [products, setProducts] = useState([]);
+function Recomendation({products}) {
     const responsive = {
         superLargeDesktop: {
           // the naming can be any, depends on you.
@@ -27,22 +24,6 @@ function Recomendation() {
           items: 1
         }
       }
-       //get all products
-  const getAllProduct = async () => {
-    try {
-      const { data } = await axios.get("/api/v1/product/get-product");
-      if (data?.success) {
-        setProducts(data?.products);
-        
-      }
-    } catch (error) {
-      toast.error("Something went wrong while loading category");
-    }
-  };
-        useEffect(() => {
-    getAllProduct();
-    // eslint-disable-next-line
-  }, []);
   return (
     <div className='mt-4 mb-4'>
       <div className='ms-4 mb-4'>
